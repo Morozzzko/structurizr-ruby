@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby_version: [jruby]
+        ruby_version: ["jruby-head"]
 
     steps:
     - uses: actions/checkout@v2
