@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby_version: ["jruby-9.2.11.0"]
+        ruby_version: [jruby, jruby-head]
 
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby_version }}
     - name: Download CodeClimate reporter
