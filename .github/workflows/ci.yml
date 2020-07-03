@@ -25,7 +25,6 @@ jobs:
     - name: Build and test
       run: |
         make bundle
-        make lint
         make test
     - name: Report to CodeClimate
       run: |
