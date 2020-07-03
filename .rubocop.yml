@@ -79,3 +79,6 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: true
+
+Style/RedundantSelf:
+  Enabled: false
