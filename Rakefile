@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rake/testtask"
+require 'rake/testtask'
 
 task :code_analysis do
   sh 'bundle exec rubocop lib test'
@@ -8,7 +8,7 @@ task :code_analysis do
 end
 
 Rake::TestTask.new(:test) do |t|
-  t.libs << "test"
-  t.libs << "lib"
-  t.test_files = FileList["test/**/*_test.rb"]
+  t.libs << 'test'
+  t.libs << 'lib'
+  t.test_files = FileList['test/**/*_test.rb']
 end
