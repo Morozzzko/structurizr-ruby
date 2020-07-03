@@ -14,3 +14,5 @@ setup:
 	jruby -S gem install bundler
 	jruby -S bundle install
 
+bundle:
+	jruby -S bundle
