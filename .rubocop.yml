@@ -82,3 +82,6 @@ Style/HashTransformValues:
 
 Style/RedundantSelf:
   Enabled: false
+
+Naming/VariableName:
+  Enabled: false
