@@ -85,3 +85,6 @@ Style/RedundantSelf:
 
 Naming/VariableName:
   Enabled: false
+
+Lint/UselessAssignment:
+  Enabled: false
