@@ -17,3 +17,6 @@ setup:
 
 bundle:
 	jruby -S bundle
+
+lint:
+	jruby -S bundle exec rubocop
