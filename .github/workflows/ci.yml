@@ -21,7 +21,7 @@ jobs:
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
       env:
-        CC_TEST_REPORTER_ID: get_a_test_reporter_id_from_code_climate
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     - name: Build and test
       run: |
         make bundle
