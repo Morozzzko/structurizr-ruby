@@ -14,5 +14,9 @@ module Structurizr
     View = ::Java::ComStructurizrView
     Client = ::Java::ComStructurizrClient
     Util = ::Java::ComStructurizrUtil
+
+    class Model::ModelItem
+      java_alias :addTags, :addTags, [java.lang.String[]]
+    end
   end
 end

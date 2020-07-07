@@ -30,22 +30,22 @@ module Structurizr
         internetBankingSystem = model.addSoftwareSystem(Location.Internal, 'Internet Banking System', 'Allows customers to view information about their bank accounts, and make payments.')
         customer.uses(internetBankingSystem, 'Views account balances, and makes payments using')
 
-        mainframeBankingSystem = model.addSoftwareSystem(Location.Internal, 'Mainframe Banking System', 'Stores all of the core banking information about customers, accounts, transactions, etc.')
-        # mainframeBankingSystem.addTags(EXISTING_SYSTEM_TAG)
+        mainframeBankingSystem = model.addSoftwareSystem(Internal, 'Mainframe Banking System', 'Stores all of the core banking information about customers, accounts, transactions, etc.')
+        mainframeBankingSystem.addTags(EXISTING_SYSTEM_TAG)
         internetBankingSystem.uses(mainframeBankingSystem, 'Gets account information from, and makes payments using')
 
         emailSystem = model.addSoftwareSystem(Location.Internal, 'E-mail System', 'The internal Microsoft Exchange e-mail system.')
         internetBankingSystem.uses(emailSystem, 'Sends e-mail using')
-        # emailSystem.addTags(EXISTING_SYSTEM_TAG)
+        emailSystem.addTags(EXISTING_SYSTEM_TAG)
         emailSystem.delivers(customer, 'Sends e-mails to')
 
         atm = model.addSoftwareSystem(Location.Internal, 'ATM', 'Allows customers to withdraw cash.')
-        # atm.addTags(EXISTING_SYSTEM_TAG)
+        atm.addTags(EXISTING_SYSTEM_TAG)
         atm.uses(mainframeBankingSystem, 'Uses')
         customer.uses(atm, 'Withdraws cash using')
 
         customerServiceStaff = model.addPerson(Location.Internal, 'Customer Service Staff', 'Customer service staff within the bank.')
-        # customerServiceStaff.addTags(BANK_STAFF_TAG)
+        customerServiceStaff.addTags(BANK_STAFF_TAG)
         customerServiceStaff.uses(mainframeBankingSystem, 'Uses')
         customer.interactsWith(customerServiceStaff, 'Asks questions to', 'Telephone')
 
@@ -55,13 +55,13 @@ module Structurizr
 
         # containers
         singlePageApplication = internetBankingSystem.addContainer('Single-Page Application', 'Provides all of the Internet banking functionality to customers via their web browser.', 'JavaScript and Angular')
-        # singlePageApplication.addTags(WEB_BROWSER_TAG)
+        singlePageApplication.addTags(WEB_BROWSER_TAG)
         mobileApp = internetBankingSystem.addContainer('Mobile App', 'Provides a limited subset of the Internet banking functionality to customers via their mobile device.', 'Xamarin')
-        # mobileApp.addTags(MOBILE_APP_TAG)
+        mobileApp.addTags(MOBILE_APP_TAG)
         webApplication = internetBankingSystem.addContainer('Web Application', 'Delivers the static content and the Internet banking single page application.', 'Java and Spring MVC')
         apiApplication = internetBankingSystem.addContainer('API Application', 'Provides Internet banking functionality via a JSON/HTTPS API.', 'Java and Spring MVC')
         database = internetBankingSystem.addContainer('Database', 'Stores user registration information, hashed authentication credentials, access logs, etc.', 'Oracle Database Schema')
-        # database.addTags(DATABASE_TAG)
+        database.addTags(DATABASE_TAG)
 
         customer.uses(webApplication, 'Visits bigbank.com/ib using', 'HTTPS')
         customer.uses(singlePageApplication, 'Views account balances, and makes payments using', '')
@@ -125,14 +125,14 @@ module Structurizr
         livePrimaryDatabase = primaryDatabaseServer.add(database)
 
         bigBankdb02 = bigBankDataCenter.addDeploymentNode('bigbank-db02', 'The secondary database server.', 'Ubuntu 16.04 LTS', 1, Metal::Util::MapUtils.create('Location=Reading'))
-        # bigBankdb02.addTags(FAILOVER_TAG)
+        bigBankdb02.addTags(FAILOVER_TAG)
         secondaryDatabaseServer = bigBankdb02.addDeploymentNode('Oracle - Secondary', 'A secondary, standby database server, used for failover purposes only.', 'Oracle 12c')
-        # secondaryDatabaseServer.addTags(FAILOVER_TAG)
+        secondaryDatabaseServer.addTags(FAILOVER_TAG)
         liveSecondaryDatabase = secondaryDatabaseServer.add(database)
 
         # model.getRelationships().stream().filter(r -> r.getDestination().equals(liveSecondaryDatabase)).forEach(r -> r.addTags(FAILOVER_TAG));
         dataReplicationRelationship = primaryDatabaseServer.uses(secondaryDatabaseServer, 'Replicates data to', '')
-        # liveSecondaryDatabase.addTags(FAILOVER_TAG)
+        liveSecondaryDatabase.addTags(FAILOVER_TAG)
         refute_nil workspace
       end
     end

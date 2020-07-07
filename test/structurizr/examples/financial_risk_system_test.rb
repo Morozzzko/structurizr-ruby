@@ -31,14 +31,15 @@ module Structurizr
         financialRiskSystem.uses(referenceDataSystem, 'Gets counterparty data from')
 
         referenceDataSystemV2 = model.addSoftwareSystem('Reference Data System v2.0', 'Manages reference data for all counterparties the bank interacts with.')
-        financialRiskSystem.uses(referenceDataSystemV2, 'Gets counterparty data from')
+        referenceDataSystemV2.addTags("Future State");
+        financialRiskSystem.uses(referenceDataSystemV2, 'Gets counterparty data from').addTags("Future State")
 
         emailSystem = model.addSoftwareSystem('E-mail system', "The bank's Microsoft Exchange system.")
         financialRiskSystem.uses(emailSystem, 'Sends a notification that a report is ready to')
         emailSystem.delivers(businessUser, 'Sends a notification that a report is ready to', 'E-mail message', InteractionStyle.Asynchronous)
 
         centralMonitoringService = model.addSoftwareSystem('Central Monitoring Service', "The bank's central monitoring and alerting dashboard.")
-        financialRiskSystem.uses(centralMonitoringService, 'Sends critical failure alerts to', 'SNMP', InteractionStyle.Asynchronous)
+        financialRiskSystem.uses(centralMonitoringService, 'Sends critical failure alerts to', 'SNMP', InteractionStyle.Asynchronous).addTags(TAG_ALERT)
 
         activeDirectory = model.addSoftwareSystem('Active Directory', "The bank's authentication and authorisation system.")
         financialRiskSystem.uses(activeDirectory, 'Uses for user authentication and authorisation')
