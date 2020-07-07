@@ -25,9 +25,27 @@ Install the gem:
 
     $ jruby -S gem install structurizr
 
+or add it to your Gemfile via CLI:
+
+    $ bundle add structurizr
+
+or just edit your `Gemfile` manually:
+
+```ruby
+# Gemfile
+
+gem 'structurizr'
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+Before you start, you need to `require` the necessary files:
+
+```ruby
+require 'structurizr'
+```
+
+Now you can go ahead and use `Structurizr::Workspace` to create your workspace. See [examples](/test/structurizr/examples/) with complete definitions.
 
 ## Development
 
