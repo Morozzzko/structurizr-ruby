@@ -15,7 +15,9 @@ Here are the things you should be able to do with this gem as we progress:
 * Manage [architecture decision records](https://github.com/joelparkerhenderson/architecture_decision_record)
 * Manage documentation
 
-While I'm aiming for a good feature compatibility with Java's structurizr, I simply can't add every available feature right away. Any help is welcome, so if your feature is missing, please report it or send a pull-request – both will be extremely helpful
+This library provides wrappers around Java's library, so it's essentially feature complete since the first public release. However, the goal is to provide idiomatic Ruby experience. We achieve it by building our own wrappers and DSL. 
+
+If you've met a feature which is not implemented via Ruby DSL, you can always use [`Structurizr::Metal`](/lib/structurizr/metal.rb) to access Java classes and methods. Please don't forget to [submit issue or a pull-request](#Contributing) which describes your use-case and the missing features.
 
 ## Installation
 
