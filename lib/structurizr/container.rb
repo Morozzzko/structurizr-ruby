@@ -5,7 +5,6 @@ require 'structurizr/utils'
 
 module Structurizr
   class Container < DelegateClass(Metal::Model::Container)
-    include Utils::DecamelizeMethods
     include Utils::DynamicAttributes
 
     attr_reader :container

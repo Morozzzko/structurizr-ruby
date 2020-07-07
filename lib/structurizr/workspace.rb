@@ -7,8 +7,6 @@ require 'structurizr/enterprise'
 
 module Structurizr
   class Workspace < DelegateClass(Metal::Root::Workspace)
-    include Utils::DecamelizeMethods
-
     attr_reader :workspace
     def initialize(name, description)
       @workspace = Metal::Root::Workspace.new(name, description)

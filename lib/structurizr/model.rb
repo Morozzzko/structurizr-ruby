@@ -5,7 +5,6 @@ require 'structurizr/utils'
 
 module Structurizr
   class Model < DelegateClass(Metal::Model::Model)
-    include Utils::DecamelizeMethods
     include Utils::DynamicAttributes
   end
 end

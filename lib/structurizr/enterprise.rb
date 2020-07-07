@@ -5,7 +5,6 @@ require 'structurizr/utils'
 
 module Structurizr
   class Enterprise < DelegateClass(Metal::Model::Enterprise)
-    include Utils::DecamelizeMethods
     include Utils::DynamicAttributes
 
     attr_reader :enterprise
