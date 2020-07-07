@@ -7,5 +7,4 @@ require 'structurizr/location'
 
 module Structurizr
   class Error < StandardError; end
-  # Your code goes here...
 end
