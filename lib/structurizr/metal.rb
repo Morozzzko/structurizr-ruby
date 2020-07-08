@@ -17,6 +17,13 @@ module Structurizr
 
     class Model::ModelItem
       java_alias :addTags, :addTags, [java.lang.String[]]
+      java_alias :add_tags, :addTags, [java.lang.String[]]
+      java_alias :getTags, :getTags, []
+      java_alias :get_tags, :getTags, []
+      java_alias :removeTag, :removeTag, [java.lang.String]
+      java_alias :remove_tag, :removeTag, [java.lang.String]
+      java_alias :hasTag, :hasTag, [java.lang.String]
+      java_alias :has_tag, :hasTag, [java.lang.String]
     end
   end
 end
