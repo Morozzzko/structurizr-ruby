@@ -17,7 +17,7 @@ module Structurizr
     alias to_java workspace
 
     def to_json(*_args)
-      Metal::Util::WorkspaceUtils.to_json(to_java, false)
+      Metal::Util::WorkspaceUtils.to_json(to_java, true)
     end
   end
 end
