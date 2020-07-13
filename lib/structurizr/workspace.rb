@@ -13,5 +13,7 @@ module Structurizr
 
       super(@workspace)
     end
+
+    alias to_java workspace
   end
 end
