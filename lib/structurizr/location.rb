@@ -1,15 +1,10 @@
 # frozen_string_literal: true
 
+require 'structurizr/utils'
 require 'structurizr/metal'
 
 module Structurizr
-  module Location
-    def self.Internal # rubocop:disable Naming/MethodName
-      Metal::Model::Location::Internal
-    end
-
-    def self.External # rubocop:disable Naming/MethodName
-      Metal::Model::Location::External
-    end
+  class Location < DelegateClass(Metal::Model::Location)
+    extend Utils::JavaEnum[Metal::Model::Location]
   end
 end

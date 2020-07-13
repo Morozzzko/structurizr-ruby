@@ -1,15 +1,10 @@
 # frozen_string_literal: true
 
+require 'structurizr/utils'
 require 'structurizr/metal'
 
 module Structurizr
-  module InteractionStyle
-    def self.Synchronous # rubocop:disable Naming/MethodName
-      Metal::Model::InteractionStyle::Synchronous
-    end
-
-    def self.Asynchronous # rubocop:disable Naming/MethodName
-      Metal::Model::InteractionStyle::Asynchronous
-    end
+  class InteractionStyle < DelegateClass(Metal::Model::InteractionStyle)
+    extend Utils::JavaEnum[Metal::Model::InteractionStyle]
   end
 end

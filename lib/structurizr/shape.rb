@@ -4,7 +4,7 @@ require 'structurizr/utils'
 require 'structurizr/metal'
 
 module Structurizr
-  class PaperSize < DelegateClass(Metal::View::PaperSize)
-    extend Utils::JavaEnum[Metal::View::PaperSize]
+  class Shape < DelegateClass(Metal::View::Shape)
+    extend Utils::JavaEnum[Metal::View::Shape]
   end
 end
