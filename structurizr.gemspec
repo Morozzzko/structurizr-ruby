@@ -26,9 +26,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-minitest'
-  spec.add_development_dependency 'pry'
   spec.add_development_dependency 'simplecov', '~> 0.17.1'
 end
