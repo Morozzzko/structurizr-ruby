@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-# https://github.com/structurizr/java/blob/master/structurizr-examples/src/com/structurizr/example/BigBankPlc.java
+# https://github.com/structurizr/java/blob/eadc3f8d4210f62c7338a3dd15941f323f4dfcf7/structurizr-examples/src/com/structurizr/example/BigBankPlc.java
 module Structurizr
   module Examples
     class BingBankPlcTest < Minitest::Test
@@ -14,12 +14,9 @@ module Structurizr
       FAILOVER_TAG = 'Failover'
 
       def test_definition
-        workspace = Workspace.new(
-          'Big Bank plc',
-          'This is an example workspace to illustrate the key features of Structurizr, based around a fictional online banking system.'
-        )
+        workspace = ::Structurizr::Workspace.new('Big Bank plc', 'This is an example workspace to illustrate the key features of Structurizr, based around a fictional online banking system.')
         model = workspace.getModel
-        model.setImpliedRelationshipsStrategy(::Structurizr::Metal::Model::CreateImpliedRelationshipsUnlessAnyRelationshipExistsStrategy.new)
+        model.setImpliedRelationshipsStrategy(Metal::Model::CreateImpliedRelationshipsUnlessAnyRelationshipExistsStrategy.new)
         views = workspace.getViews
 
         model.setEnterprise(Enterprise.new('Big Bank plc').to_java)
@@ -30,7 +27,7 @@ module Structurizr
         internetBankingSystem = model.addSoftwareSystem(Location.Internal, 'Internet Banking System', 'Allows customers to view information about their bank accounts, and make payments.')
         customer.uses(internetBankingSystem, 'Views account balances, and makes payments using')
 
-        mainframeBankingSystem = model.addSoftwareSystem(Internal, 'Mainframe Banking System', 'Stores all of the core banking information about customers, accounts, transactions, etc.')
+        mainframeBankingSystem = model.addSoftwareSystem(Location.Internal, 'Mainframe Banking System', 'Stores all of the core banking information about customers, accounts, transactions, etc.')
         mainframeBankingSystem.addTags(EXISTING_SYSTEM_TAG)
         internetBankingSystem.uses(mainframeBankingSystem, 'Gets account information from, and makes payments using')
 
@@ -50,7 +47,7 @@ module Structurizr
         customer.interactsWith(customerServiceStaff, 'Asks questions to', 'Telephone')
 
         backOfficeStaff = model.addPerson(Location.Internal, 'Back Office Staff', 'Administration and support staff within the bank.')
-        # backOfficeStaff.addTags(BANK_STAFF_TAG)
+        backOfficeStaff.addTags(BANK_STAFF_TAG)
         backOfficeStaff.uses(mainframeBankingSystem, 'Uses')
 
         # containers
@@ -81,8 +78,12 @@ module Structurizr
         mainframeBankingSystemFacade = apiApplication.addComponent('Mainframe Banking System Facade', 'A facade onto the mainframe banking system.', 'Spring Bean')
         emailComponent = apiApplication.addComponent('E-mail Component', 'Sends e-mails to users.', 'Spring Bean')
 
-        # apiApplication.getComponents().stream().filter(c -> "Spring MVC Rest Controller".equals(c.getTechnology())).forEach(c -> singlePageApplication.uses(c, "Makes API calls to", "JSON/HTTPS"));
-        # apiApplication.getComponents().stream().filter(c -> "Spring MVC Rest Controller".equals(c.getTechnology())).forEach(c -> mobileApp.uses(c, "Makes API calls to", "JSON/HTTPS"));
+        apiApplication.get_components.select do |component|
+          component.get_technology == 'Spring MVC Rest Controller'
+        end.each do |component|
+          singlePageApplication.uses(component, 'Makes API calls to', 'JSON/HTTPS')
+          mobileApp.uses(component, 'Makes API calls to', 'JSON/HTTPS')
+        end
         signinController.uses(securityComponent, 'Uses')
         accountsSummaryController.uses(mainframeBankingSystemFacade, 'Uses')
         resetPasswordController.uses(securityComponent, 'Uses')
@@ -133,6 +134,125 @@ module Structurizr
         # model.getRelationships().stream().filter(r -> r.getDestination().equals(liveSecondaryDatabase)).forEach(r -> r.addTags(FAILOVER_TAG));
         dataReplicationRelationship = primaryDatabaseServer.uses(secondaryDatabaseServer, 'Replicates data to', '')
         liveSecondaryDatabase.addTags(FAILOVER_TAG)
+
+        # views/diagrams
+        systemLandscapeView = views.createSystemLandscapeView('SystemLandscape', 'The system landscape diagram for Big Bank plc.')
+        systemLandscapeView.addAllElements
+        systemLandscapeView.setPaperSize(PaperSize.A5_Landscape)
+
+        systemContextView = views.createSystemContextView(internetBankingSystem, 'SystemContext', 'The system context diagram for the Internet Banking System.')
+        systemContextView.setEnterpriseBoundaryVisible(false)
+        systemContextView.addNearestNeighbours(internetBankingSystem)
+        systemContextView.setPaperSize(PaperSize.A5_Landscape)
+
+        containerView = views.createContainerView(internetBankingSystem, 'Containers', 'The container diagram for the Internet Banking System.')
+        containerView.add(customer)
+        containerView.addAllContainers
+        containerView.add(mainframeBankingSystem)
+        containerView.add(emailSystem)
+        containerView.setPaperSize(PaperSize.A5_Landscape)
+
+        componentView = views.createComponentView(apiApplication, 'Components', 'The component diagram for the API Application.')
+        componentView.add(mobileApp)
+        componentView.add(singlePageApplication)
+        componentView.add(database)
+        componentView.addAllComponents
+        componentView.add(mainframeBankingSystem)
+        componentView.add(emailSystem)
+        componentView.setPaperSize(PaperSize.A5_Landscape)
+
+        systemLandscapeView.addAnimation(internetBankingSystem, customer, mainframeBankingSystem, emailSystem)
+        systemLandscapeView.addAnimation(atm)
+        systemLandscapeView.addAnimation(customerServiceStaff, backOfficeStaff)
+
+        systemContextView.addAnimation(internetBankingSystem)
+        systemContextView.addAnimation(customer)
+        systemContextView.addAnimation(mainframeBankingSystem)
+        systemContextView.addAnimation(emailSystem)
+
+        containerView.addAnimation(customer, mainframeBankingSystem, emailSystem)
+        containerView.addAnimation(webApplication)
+        containerView.addAnimation(singlePageApplication)
+        containerView.addAnimation(mobileApp)
+        containerView.addAnimation(apiApplication)
+        containerView.addAnimation(database)
+
+        componentView.addAnimation(singlePageApplication, mobileApp, database, emailSystem, mainframeBankingSystem)
+        componentView.addAnimation(signinController, securityComponent)
+        componentView.addAnimation(accountsSummaryController, mainframeBankingSystemFacade)
+        componentView.addAnimation(resetPasswordController, emailComponent)
+
+        # dynamic diagrams and deployment diagrams are not available with the Free Plan
+        dynamicView = views.createDynamicView(apiApplication, 'SignIn', 'Summarises how the sign in feature works in the single-page application.')
+        dynamicView.add(singlePageApplication, 'Submits credentials to', signinController)
+        dynamicView.add(signinController, 'Calls isAuthenticated() on', securityComponent)
+        dynamicView.add(securityComponent, 'select * from users where username = ?', database)
+        dynamicView.setPaperSize(PaperSize.A5_Landscape)
+
+        developmentDeploymentView = views.createDeploymentView(internetBankingSystem, 'DevelopmentDeployment', 'An example development deployment scenario for the Internet Banking System.')
+        developmentDeploymentView.setEnvironment('Development')
+        developmentDeploymentView.add(developerLaptop)
+        developmentDeploymentView.setPaperSize(PaperSize.A5_Landscape)
+
+        developmentDeploymentView.addAnimation(developmentSinglePageApplication)
+        developmentDeploymentView.addAnimation(developmentWebApplication, developmentApiApplication)
+        developmentDeploymentView.addAnimation(developmentDatabase)
+
+        liveDeploymentView = views.createDeploymentView(internetBankingSystem, 'LiveDeployment', 'An example live deployment scenario for the Internet Banking System.')
+        liveDeploymentView.setEnvironment('Live')
+        liveDeploymentView.add(bigBankDataCenter)
+        liveDeploymentView.add(customerMobileDevice)
+        liveDeploymentView.add(customerComputer)
+        liveDeploymentView.add(dataReplicationRelationship)
+        liveDeploymentView.setPaperSize(PaperSize.A5_Landscape)
+
+        liveDeploymentView.addAnimation(liveSinglePageApplication)
+        liveDeploymentView.addAnimation(liveMobileApp)
+        liveDeploymentView.addAnimation(liveWebApplication, liveApiApplication)
+        liveDeploymentView.addAnimation(livePrimaryDatabase)
+        liveDeploymentView.addAnimation(liveSecondaryDatabase)
+
+        # colours, shapes and other diagram styling
+        styles = views.getConfiguration.getStyles
+        styles.addElementStyle(Tags.SOFTWARE_SYSTEM).background('#1168bd').color('#ffffff')
+        styles.addElementStyle(Tags.CONTAINER).background('#438dd5').color('#ffffff')
+        styles.addElementStyle(Tags.COMPONENT).background('#85bbf0').color('#000000')
+        styles.addElementStyle(Tags.PERSON).background('#08427b').color('#ffffff').shape(Shape.Person).fontSize(22)
+        styles.addElementStyle(EXISTING_SYSTEM_TAG).background('#999999').color('#ffffff')
+        styles.addElementStyle(BANK_STAFF_TAG).background('#999999').color('#ffffff')
+        styles.addElementStyle(WEB_BROWSER_TAG).shape(Shape.WebBrowser)
+        styles.addElementStyle(MOBILE_APP_TAG).shape(Shape.MobileDeviceLandscape)
+        styles.addElementStyle(DATABASE_TAG).shape(Shape.Cylinder)
+        styles.addElementStyle(FAILOVER_TAG).opacity(25)
+        styles.addRelationshipStyle(FAILOVER_TAG).opacity(25).position(70)
+
+        # documentation
+        # - usually the documentation would be included from separate Markdown/AsciiDoc files, but this is just an example
+        template = Metal::Documentation::StructurizrDocumentationTemplate.new(workspace.to_java)
+        template.addContextSection(internetBankingSystem, Format.Markdown,
+                                   "Here is some context about the Internet Banking System...\n" \
+                                           "![](embed:SystemLandscape)\n" \
+                                           "![](embed:SystemContext)\n" \
+                                           "### Internet Banking System\n...\n" \
+                                           "### Mainframe Banking System\n...\n")
+        template.addContainersSection(internetBankingSystem, Format.Markdown,
+                                      "Here is some information about the containers within the Internet Banking System...\n" \
+                                              "![](embed:Containers)\n" \
+                                              "### Web Application\n...\n" \
+                                              "### Database\n...\n")
+        template.addComponentsSection(webApplication, Format.Markdown,
+                                      "Here is some information about the API Application...\n" \
+                                              "![](embed:Components)\n" \
+                                              "### Sign in process\n" \
+                                              "Here is some information about the Sign In Controller, including how the sign in process works...\n" \
+                                              '![](embed:SignIn)')
+        template.addDevelopmentEnvironmentSection(internetBankingSystem, Format.AsciiDoc,
+                                                  "Here is some information about how to set up a development environment for the Internet Banking System...\n" \
+                                                          'image::embed:DevelopmentDeployment[]')
+        template.addDeploymentSection(internetBankingSystem, Format.AsciiDoc,
+                                      "Here is some information about the live deployment environment for the Internet Banking System...\n" \
+                                              'image::embed:LiveDeployment[]')
+
         refute_nil workspace
       end
     end
