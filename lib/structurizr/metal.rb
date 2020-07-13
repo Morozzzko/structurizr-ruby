@@ -3,6 +3,9 @@
 require 'java'
 
 require 'structurizr/metal/jars/commons-logging-1.2.jar'
+require 'structurizr/metal/jars/jackson-core-2.11.1.jar'
+require 'structurizr/metal/jars/jackson-databind-2.11.1.jar'
+require 'structurizr/metal/jars/jackson-annotations-2.11.1.jar'
 require 'structurizr/metal/jars/structurizr-core-1.4.7.jar'
 require 'structurizr/metal/jars/structurizr-client-1.4.7.jar'
 
