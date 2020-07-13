@@ -253,7 +253,7 @@ module Structurizr
                                       "Here is some information about the live deployment environment for the Internet Banking System...\n" \
                                               'image::embed:LiveDeployment[]')
 
-        refute_nil workspace
+        refute_nil workspace.to_json
       end
     end
   end
