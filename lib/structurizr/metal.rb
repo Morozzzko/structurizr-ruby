@@ -14,6 +14,7 @@ module Structurizr
     View = ::Java::ComStructurizrView
     Client = ::Java::ComStructurizrClient
     Util = ::Java::ComStructurizrUtil
+    Documentation = ::Java::ComStructurizrDocumentation
 
     # We need it due to a behavior in jruby which doesn't bind methods from non-public classes
     # https://github.com/jruby/jruby/issues/6197
