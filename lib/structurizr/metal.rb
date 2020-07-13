@@ -15,6 +15,9 @@ module Structurizr
     Client = ::Java::ComStructurizrClient
     Util = ::Java::ComStructurizrUtil
 
+    # We need it due to a behavior in jruby which doesn't bind methods from non-public classes
+    # https://github.com/jruby/jruby/issues/6197
+    # For now we'll stick to our own patch which manually binds those methods
     class Model::ModelItem
       java_alias :addTags, :addTags, [java.lang.String[]]
       java_alias :add_tags, :addTags, [java.lang.String[]]
