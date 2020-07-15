@@ -23,3 +23,6 @@ bundle:
 
 lint:
 	jruby -S bundle exec rubocop
+
+console:
+	bin/console
