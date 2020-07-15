@@ -12,7 +12,7 @@ download-jars:
 	mvn dependency:get -Dartifact=com.structurizr:structurizr-client:LATEST -Ddest=./lib/structurizr/metal/jars/
 
 test:
-	jruby -S bundle exec rake test
+	jruby -Itest -Ilib bin/test
 
 setup:
 	jruby -S gem install bundler
