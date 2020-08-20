@@ -1,4 +1,4 @@
-.PHONY: download-jars test
+.PHONY: download-jars test console
 
 
 download-jars:
