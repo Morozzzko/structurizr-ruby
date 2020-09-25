@@ -22,12 +22,12 @@ jobs:
         ./cc-test-reporter before-build
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-    - name: Setup environment
+    - name: Setup
       run: |
         make setup
-    - name: Build and test
+    - name: Test
       run: |
-        make bundle
+        echo $(jruby -S bundle --version)
         make test
     - name: Report to CodeClimate
       run: |
