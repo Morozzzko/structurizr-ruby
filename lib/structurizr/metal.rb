@@ -6,8 +6,8 @@ require 'structurizr/metal/jars/commons-logging-1.2.jar'
 require 'structurizr/metal/jars/jackson-core-2.11.2.jar'
 require 'structurizr/metal/jars/jackson-databind-2.11.2.jar'
 require 'structurizr/metal/jars/jackson-annotations-2.11.2.jar'
-require 'structurizr/metal/jars/structurizr-core-1.5.0.jar'
-require 'structurizr/metal/jars/structurizr-client-1.5.0.jar'
+require 'structurizr/metal/jars/structurizr-core-1.6.0.jar'
+require 'structurizr/metal/jars/structurizr-client-1.6.0.jar'
 
 module Structurizr
   # This namespace provides lower-level Java integration with Structurizr
