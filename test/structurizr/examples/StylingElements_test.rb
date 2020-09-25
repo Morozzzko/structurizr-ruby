@@ -1,0 +1,46 @@
+# frozen_string_literal: true
+
+###
+# An example of how to style elements on diagrams.
+#
+# The live workspace is available to view at https:##structurizr.com#share#36111
+# Source: https://github.com/structurizr/java/blob/3223f0110e0f3f0bb49b22ee43351b9b07ad3943/structurizr-examples/src/com/structurizr/example/StylingElements.java
+# Updated at: 2017-07-15
+module Structurizr
+  module Examples
+    class StylingElements < Minitest::Test
+      def test_definition
+        workspace = Workspace.new('Styling Elements', 'This is a model of my software system.')
+        model = workspace.getModel
+
+        user = model.addPerson('User', 'A user of my software system.')
+        softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
+        webApplication = softwareSystem.addContainer('Web Application', 'My web application.', 'Java and Spring MVC')
+        database = softwareSystem.addContainer('Database', 'My database.', 'Relational database schema')
+        user.uses(webApplication, 'Uses', 'HTTPS')
+        webApplication.uses(database, 'Reads from and writes to', 'JDBC')
+
+        views = workspace.getViews
+        containerView = views.createContainerView(softwareSystem, 'containers', 'An example of a container diagram.')
+        containerView.addAllElements
+
+        styles = workspace.getViews.getConfiguration.getStyles
+
+        ## example 1
+        ##        styles.addElementStyle(Tags.ELEMENT).background("#438dd5").color("#ffffff");
+
+        ## example 2
+        ##        styles.addElementStyle(Tags.ELEMENT).color("#ffffff");
+        ##        styles.addElementStyle(Tags.PERSON).background("#08427b");
+        ##        styles.addElementStyle(Tags.CONTAINER).background("#438dd5");
+
+        ## example 3
+        ##        styles.addElementStyle(Tags.ELEMENT).color("#ffffff");
+        ##        styles.addElementStyle(Tags.PERSON).background("#08427b").shape(Shape.Person);
+        ##        styles.addElementStyle(Tags.CONTAINER).background("#438dd5");
+        ##        database.addTags("Database");
+        ##        styles.addElementStyle("Database").shape(Shape.Cylinder);
+      end
+    end
+  end
+end
