@@ -22,6 +22,9 @@ jobs:
         ./cc-test-reporter before-build
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+    - name: Install newest bundler
+      run: |
+        jruby -S gem install bundler
     - name: Build and test
       run: |
         make bundle
