@@ -3,5 +3,6 @@
 require 'structurizr/metal'
 
 module Structurizr
-  ViewpointsAndPerspectivesDocumentationTemplate = Metal::Documentation::ViewpointsAndPerspectivesDocumentationTemplate
+  ViewpointsAndPerspectivesDocumentationTemplate =
+    Metal::Documentation::ViewpointsAndPerspectivesDocumentationTemplate
 end
