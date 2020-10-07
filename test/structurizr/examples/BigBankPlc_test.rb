@@ -145,7 +145,12 @@ module Structurizr
         secondaryDatabaseServer.addTags(FAILOVER_TAG)
         liveSecondaryDatabase = secondaryDatabaseServer.add(database)
 
-        #         model.getRelationships().stream().filter(r -> r.getDestination().equals(liveSecondaryDatabase)).forEach(r -> r.addTags(FAILOVER_TAG)); # TODO: rewrite to Ruby arrays
+        model.get_relationships.select do |relationship|
+          relationship.get_destination == liveSecondaryDatabase
+        end.map do |relationship|
+          relationship.addTags(FAILOVER_TAG)
+        end
+
         dataReplicationRelationship = primaryDatabaseServer.uses(secondaryDatabaseServer, 'Replicates data to', '')
         liveSecondaryDatabase.addTags(FAILOVER_TAG)
 
