@@ -29,25 +29,25 @@ module Structurizr
         braintreePayments.setUrl('https://www.braintreepayments.com')
         jerseyPost = model.addSoftwareSystem(Location.External, 'Jersey Post', 'Calculates worldwide shipping costs for packages.')
 
-        @model.get_people.select do |relationship|
+        model.get_people.select do |relationship|
           relationship.get_location == Location.External
         end.each do |relationship|
           relationship.addTags(EXTERNAL_TAG)
         end
 
-        @model.get_people.select do |relationship|
+        model.get_people.select do |relationship|
           relationship.get_location == Location.Internal
         end.each do |relationship|
           relationship.addTags(INTERNAL_TAG)
         end
 
-        @model.get_software_systems.select do |relationship|
+        model.get_software_systems.select do |relationship|
           relationship.get_location == Location.External
         end.each do |relationship|
           relationship.addTags(EXTERNAL_TAG)
         end
 
-        @model.get_software_systems.select do |relationship|
+        model.get_software_systems.select do |relationship|
           relationship.get_location == Location.Internal
         end.each do |relationship|
           relationship.addTags(INTERNAL_TAG)
