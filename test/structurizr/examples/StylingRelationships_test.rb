@@ -9,9 +9,11 @@
 module Structurizr
   module Examples
     class StylingRelationships < Minitest::Test
-      def test_definition
+      attr_reader :model, :styles
+
+      def setup
         workspace = Workspace.new('Styling Relationships', 'This is a model of my software system.')
-        model = workspace.getModel
+        @model = workspace.getModel
 
         user = model.addPerson('User', 'A user of my software system.')
         softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
@@ -24,16 +26,25 @@ module Structurizr
         containerView = views.createContainerView(softwareSystem, 'containers', 'An example of a container diagram.')
         containerView.addAllElements
 
-        styles = workspace.getViews.getConfiguration.getStyles
+        @styles = workspace.getViews.getConfiguration.getStyles
+      end
 
-        ## example 1
-        ##        styles.addRelationshipStyle(Tags.RELATIONSHIP).color("#ff0000");
+      def test_example_one
+        @styles.addRelationshipStyle(Tags.RELATIONSHIP).color('#ff0000')
+      end
 
-        ## example 2
-        # ##        model.getRelationships().stream().filter(r -> "HTTPS".equals(r.getTechnology())).forEach(r -> r.addTags("HTTPS")); # TODO: rewrite to Ruby arrays
-        # ##        model.getRelationships().stream().filter(r -> "JDBC".equals(r.getTechnology())).forEach(r -> r.addTags("JDBC")); # TODO: rewrite to Ruby arrays
-        ##        styles.addRelationshipStyle("HTTPS").color("#ff0000");
-        ##        styles.addRelationshipStyle("JDBC").color("#0000ff");
+      def test_example_two
+        @model.get_relationships.select do |relationship|
+          relationship.get_technology == 'HTTPS'
+        end.each do |relationship|
+          relationship.addTags('HTTPS')
+        end
+
+        @model.get_relationships.select do |relationship|
+          relationship.get_technology == 'JDBC'
+        end.each do |relationship|
+          relationship.addTags('JDBC')
+        end
       end
     end
   end
