@@ -8,7 +8,7 @@
 module Structurizr
   module Examples
     class ViewpointsAndPerspectivesDocumentationExample < Minitest::Test
-      attr_reader :template
+      attr_reader :template, :softwareSystem
 
       def setup
         workspace = Workspace.new('Documentation - Viewpoints and Perspectives', 'An empty software architecture document using the Viewpoints and Perspectives template.')
@@ -16,7 +16,7 @@ module Structurizr
         views = workspace.getViews
 
         user = model.addPerson('User', 'A user of my software system.')
-        softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
+        @softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
         user.uses(softwareSystem, 'Uses')
 
         contextView = views.createSystemContextView(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')

@@ -26,7 +26,7 @@ module Structurizr
         containerView = views.createContainerView(softwareSystem, 'containers', 'An example of a container diagram.')
         containerView.addAllElements
 
-        styles = workspace.getViews.getConfiguration.getStyles
+        @styles = workspace.getViews.getConfiguration.getStyles
       end
 
       def test_example_one
