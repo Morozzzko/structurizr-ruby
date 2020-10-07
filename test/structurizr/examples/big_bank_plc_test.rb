@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
-require 'test_helper'
-
-# https://github.com/structurizr/java/blob/eadc3f8d4210f62c7338a3dd15941f323f4dfcf7/structurizr-examples/src/com/structurizr/example/BigBankPlc.java
+###
+# This is an example workspace to illustrate the key features of Structurizr,
+# based around a fictional Internet Banking System for Big Bank plc.
+#
+# Source: https://github.com/structurizr/java/blob/e69e59d9fcc58c74272647a31cf29f8b2d51bb58/structurizr-examples/src/com/structurizr/example/BigBankPlc.java
+# Updated at: 2020-08-04
 module Structurizr
   module Examples
-    class BingBankPlcTest < Minitest::Test
+    class BigBankPlc < Minitest::Test
       EXISTING_SYSTEM_TAG = 'Existing System'
       BANK_STAFF_TAG = 'Bank Staff'
       WEB_BROWSER_TAG = 'Web Browser'
@@ -13,15 +16,17 @@ module Structurizr
       DATABASE_TAG = 'Database'
       FAILOVER_TAG = 'Failover'
 
+      MapUtils = Metal::Util::MapUtils
+
       def test_definition
-        workspace = ::Structurizr::Workspace.new('Big Bank plc', 'This is an example workspace to illustrate the key features of Structurizr, based around a fictional online banking system.')
+        workspace = Workspace.new('Big Bank plc', 'This is an example workspace to illustrate the key features of Structurizr, based around a fictional online banking system.')
         model = workspace.getModel
         model.setImpliedRelationshipsStrategy(Metal::Model::CreateImpliedRelationshipsUnlessAnyRelationshipExistsStrategy.new)
         views = workspace.getViews
 
         model.setEnterprise(Enterprise.new('Big Bank plc').to_java)
 
-        # people and software systems
+        ## people and software systems
         customer = model.addPerson(Location.External, 'Personal Banking Customer', 'A customer of the bank, with personal bank accounts.')
 
         internetBankingSystem = model.addSoftwareSystem(Location.Internal, 'Internet Banking System', 'Allows customers to view information about their bank accounts, and make payments.')
@@ -50,27 +55,27 @@ module Structurizr
         backOfficeStaff.addTags(BANK_STAFF_TAG)
         backOfficeStaff.uses(mainframeBankingSystem, 'Uses')
 
-        # containers
+        ## containers
         singlePageApplication = internetBankingSystem.addContainer('Single-Page Application', 'Provides all of the Internet banking functionality to customers via their web browser.', 'JavaScript and Angular')
         singlePageApplication.addTags(WEB_BROWSER_TAG)
         mobileApp = internetBankingSystem.addContainer('Mobile App', 'Provides a limited subset of the Internet banking functionality to customers via their mobile device.', 'Xamarin')
         mobileApp.addTags(MOBILE_APP_TAG)
         webApplication = internetBankingSystem.addContainer('Web Application', 'Delivers the static content and the Internet banking single page application.', 'Java and Spring MVC')
-        apiApplication = internetBankingSystem.addContainer('API Application', 'Provides Internet banking functionality via a JSON/HTTPS API.', 'Java and Spring MVC')
+        apiApplication = internetBankingSystem.addContainer('API Application', 'Provides Internet banking functionality via a JSON#HTTPS API.', 'Java and Spring MVC')
         database = internetBankingSystem.addContainer('Database', 'Stores user registration information, hashed authentication credentials, access logs, etc.', 'Oracle Database Schema')
         database.addTags(DATABASE_TAG)
 
-        customer.uses(webApplication, 'Visits bigbank.com/ib using', 'HTTPS')
+        customer.uses(webApplication, 'Visits bigbank.com#ib using', 'HTTPS')
         customer.uses(singlePageApplication, 'Views account balances, and makes payments using', '')
         customer.uses(mobileApp, 'Views account balances, and makes payments using', '')
         webApplication.uses(singlePageApplication, "Delivers to the customer's web browser", '')
         apiApplication.uses(database, 'Reads from and writes to', 'JDBC')
-        apiApplication.uses(mainframeBankingSystem, 'Makes API calls to', 'XML/HTTPS')
+        apiApplication.uses(mainframeBankingSystem, 'Makes API calls to', 'XML#HTTPS')
         apiApplication.uses(emailSystem, 'Sends e-mail using', 'SMTP')
 
-        # components
-        # - for a real-world software system, you would probably want to extract the components using
-        # - static analysis/reflection rather than manually specifying them all
+        ## components
+        ## - for a real-world software system, you would probably want to extract the components using
+        ## - static analysis#reflection rather than manually specifying them all
         signinController = apiApplication.addComponent('Sign In Controller', 'Allows users to sign in to the Internet Banking System.', 'Spring MVC Rest Controller')
         accountsSummaryController = apiApplication.addComponent('Accounts Summary Controller', 'Provides customers with a summary of their bank accounts.', 'Spring MVC Rest Controller')
         resetPasswordController = apiApplication.addComponent('Reset Password Controller', 'Allows users to reset their passwords with a single use URL.', 'Spring MVC Rest Controller')
@@ -82,24 +87,32 @@ module Structurizr
           component.get_technology == 'Spring MVC Rest Controller'
         end.each do |component|
           singlePageApplication.uses(component, 'Makes API calls to', 'JSON/HTTPS')
+        end
+        apiApplication.get_components.select do |component|
+          component.get_technology == 'Spring MVC Rest Controller'
+        end.each do |component|
           mobileApp.uses(component, 'Makes API calls to', 'JSON/HTTPS')
         end
+
         signinController.uses(securityComponent, 'Uses')
         accountsSummaryController.uses(mainframeBankingSystemFacade, 'Uses')
         resetPasswordController.uses(securityComponent, 'Uses')
         resetPasswordController.uses(emailComponent, 'Uses')
         securityComponent.uses(database, 'Reads from and writes to', 'JDBC')
-        mainframeBankingSystemFacade.uses(mainframeBankingSystem, 'Uses', 'XML/HTTPS')
+        mainframeBankingSystemFacade.uses(mainframeBankingSystem, 'Uses', 'XML#HTTPS')
         emailComponent.uses(emailSystem, 'Sends e-mail using')
 
-        # deployment nodes and container instances
+        ## deployment nodes and container instances
         developerLaptop = model.addDeploymentNode('Development', 'Developer Laptop', 'A developer laptop.', 'Microsoft Windows 10 or Apple macOS')
-        apacheTomcat = developerLaptop.addDeploymentNode('Docker - Web Server', 'A Docker container.', 'Docker')
-                                      .addDeploymentNode('Apache Tomcat', 'An open source Java EE web server.', 'Apache Tomcat 8.x', 1, Metal::Util::MapUtils.create('Xmx=512M', 'Xms=1024M', 'Java Version=8'))
+        apacheTomcat = developerLaptop.addDeploymentNode('Docker Container - Web Server', 'A Docker container.', 'Docker')
+                                      .addDeploymentNode('Apache Tomcat', 'An open source Java EE web server.', 'Apache Tomcat 8.x', 1, MapUtils.create('Xmx=512M', 'Xms=1024M', 'Java Version=8'))
         developmentWebApplication = apacheTomcat.add(webApplication)
         developmentApiApplication = apacheTomcat.add(apiApplication)
 
-        developmentDatabase = developerLaptop.addDeploymentNode('Docker - Database Server', 'A Docker container.', 'Docker')
+        bigBankDataCenterForDevelopment = model.addDeploymentNode('Development', 'Big Bank plc', '', 'Big Bank plc data center')
+        developmentMainframeBankingSystem = bigBankDataCenterForDevelopment.addDeploymentNode('bigbank-dev001').add(mainframeBankingSystem)
+
+        developmentDatabase = developerLaptop.addDeploymentNode('Docker Container - Database Server', 'A Docker container.', 'Docker')
                                              .addDeploymentNode('Database Server', 'A development database.', 'Oracle 12c')
                                              .add(database)
 
@@ -111,21 +124,22 @@ module Structurizr
         customerComputer = model.addDeploymentNode('Live', "Customer's computer", '', 'Microsoft Windows or Apple macOS')
         liveSinglePageApplication = customerComputer.addDeploymentNode('Web Browser', '', 'Chrome, Firefox, Safari, or Edge').add(singlePageApplication)
 
-        bigBankDataCenter = model.addDeploymentNode('Live', 'Big Bank plc', '', 'Big Bank plc data center')
+        bigBankDataCenterForLive = model.addDeploymentNode('Live', 'Big Bank plc', '', 'Big Bank plc data center')
+        liveMainframeBankingSystem = bigBankDataCenterForLive.addDeploymentNode('bigbank-prod001').add(mainframeBankingSystem)
 
-        liveWebServer = bigBankDataCenter.addDeploymentNode('bigbank-web***', 'A web server residing in the web server farm, accessed via F5 BIG-IP LTMs.', 'Ubuntu 16.04 LTS', 4, Metal::Util::MapUtils.create('Location=London and Reading'))
-        liveWebApplication = liveWebServer.addDeploymentNode('Apache Tomcat', 'An open source Java EE web server.', 'Apache Tomcat 8.x', 1, Metal::Util::MapUtils.create('Xmx=512M', 'Xms=1024M', 'Java Version=8'))
+        liveWebServer = bigBankDataCenterForLive.addDeploymentNode('bigbank-web###', 'A web server residing in the web server farm, accessed via F5 BIG-IP LTMs.', 'Ubuntu 16.04 LTS', 4, MapUtils.create('Location=London and Reading'))
+        liveWebApplication = liveWebServer.addDeploymentNode('Apache Tomcat', 'An open source Java EE web server.', 'Apache Tomcat 8.x', 1, MapUtils.create('Xmx=512M', 'Xms=1024M', 'Java Version=8'))
                                           .add(webApplication)
 
-        liveApiServer = bigBankDataCenter.addDeploymentNode('bigbank-api***', 'A web server residing in the web server farm, accessed via F5 BIG-IP LTMs.', 'Ubuntu 16.04 LTS', 8, Metal::Util::MapUtils.create('Location=London and Reading'))
-        liveApiApplication = liveApiServer.addDeploymentNode('Apache Tomcat', 'An open source Java EE web server.', 'Apache Tomcat 8.x', 1, Metal::Util::MapUtils.create('Xmx=512M', 'Xms=1024M', 'Java Version=8'))
+        liveApiServer = bigBankDataCenterForLive.addDeploymentNode('bigbank-api###', 'A web server residing in the web server farm, accessed via F5 BIG-IP LTMs.', 'Ubuntu 16.04 LTS', 8, MapUtils.create('Location=London and Reading'))
+        liveApiApplication = liveApiServer.addDeploymentNode('Apache Tomcat', 'An open source Java EE web server.', 'Apache Tomcat 8.x', 1, MapUtils.create('Xmx=512M', 'Xms=1024M', 'Java Version=8'))
                                           .add(apiApplication)
 
-        primaryDatabaseServer = bigBankDataCenter.addDeploymentNode('bigbank-db01', 'The primary database server.', 'Ubuntu 16.04 LTS', 1, Metal::Util::MapUtils.create('Location=London'))
-                                                 .addDeploymentNode('Oracle - Primary', 'The primary, live database server.', 'Oracle 12c')
+        primaryDatabaseServer = bigBankDataCenterForLive.addDeploymentNode('bigbank-db01', 'The primary database server.', 'Ubuntu 16.04 LTS', 1, MapUtils.create('Location=London'))
+                                                        .addDeploymentNode('Oracle - Primary', 'The primary, live database server.', 'Oracle 12c')
         livePrimaryDatabase = primaryDatabaseServer.add(database)
 
-        bigBankdb02 = bigBankDataCenter.addDeploymentNode('bigbank-db02', 'The secondary database server.', 'Ubuntu 16.04 LTS', 1, Metal::Util::MapUtils.create('Location=Reading'))
+        bigBankdb02 = bigBankDataCenterForLive.addDeploymentNode('bigbank-db02', 'The secondary database server.', 'Ubuntu 16.04 LTS', 1, MapUtils.create('Location=Reading'))
         bigBankdb02.addTags(FAILOVER_TAG)
         secondaryDatabaseServer = bigBankdb02.addDeploymentNode('Oracle - Secondary', 'A secondary, standby database server, used for failover purposes only.', 'Oracle 12c')
         secondaryDatabaseServer.addTags(FAILOVER_TAG)
@@ -133,13 +147,14 @@ module Structurizr
 
         model.get_relationships.select do |relationship|
           relationship.get_destination == liveSecondaryDatabase
-        end.each do |relationship|
+        end.map do |relationship|
           relationship.addTags(FAILOVER_TAG)
         end
+
         dataReplicationRelationship = primaryDatabaseServer.uses(secondaryDatabaseServer, 'Replicates data to', '')
         liveSecondaryDatabase.addTags(FAILOVER_TAG)
 
-        # views/diagrams
+        ## views#diagrams
         systemLandscapeView = views.createSystemLandscapeView('SystemLandscape', 'The system landscape diagram for Big Bank plc.')
         systemLandscapeView.addAllElements
         systemLandscapeView.setPaperSize(PaperSize.A5_Landscape)
@@ -186,37 +201,43 @@ module Structurizr
         componentView.addAnimation(accountsSummaryController, mainframeBankingSystemFacade)
         componentView.addAnimation(resetPasswordController, emailComponent)
 
-        # dynamic diagrams and deployment diagrams are not available with the Free Plan
+        ## dynamic diagrams and deployment diagrams are not available with the Free Plan
         dynamicView = views.createDynamicView(apiApplication, 'SignIn', 'Summarises how the sign in feature works in the single-page application.')
         dynamicView.add(singlePageApplication, 'Submits credentials to', signinController)
-        dynamicView.add(signinController, 'Calls isAuthenticated() on', securityComponent)
-        dynamicView.add(securityComponent, 'select * from users where username = ?', database)
+        dynamicView.add(signinController, 'Validates credentials using', securityComponent)
+        dynamicView.add(securityComponent, 'select # from users where username = ?', database)
+        dynamicView.add(database, 'Returns user data to', securityComponent)
+        dynamicView.add(securityComponent, 'Returns true if the hashed password matches', signinController)
+        dynamicView.add(signinController, 'Sends back an authentication token to', singlePageApplication)
         dynamicView.setPaperSize(PaperSize.A5_Landscape)
 
         developmentDeploymentView = views.createDeploymentView(internetBankingSystem, 'DevelopmentDeployment', 'An example development deployment scenario for the Internet Banking System.')
         developmentDeploymentView.setEnvironment('Development')
         developmentDeploymentView.add(developerLaptop)
+        developmentDeploymentView.add(bigBankDataCenterForDevelopment)
         developmentDeploymentView.setPaperSize(PaperSize.A5_Landscape)
 
         developmentDeploymentView.addAnimation(developmentSinglePageApplication)
         developmentDeploymentView.addAnimation(developmentWebApplication, developmentApiApplication)
         developmentDeploymentView.addAnimation(developmentDatabase)
+        developmentDeploymentView.addAnimation(developmentMainframeBankingSystem)
 
         liveDeploymentView = views.createDeploymentView(internetBankingSystem, 'LiveDeployment', 'An example live deployment scenario for the Internet Banking System.')
         liveDeploymentView.setEnvironment('Live')
-        liveDeploymentView.add(bigBankDataCenter)
+        liveDeploymentView.add(bigBankDataCenterForLive)
         liveDeploymentView.add(customerMobileDevice)
         liveDeploymentView.add(customerComputer)
         liveDeploymentView.add(dataReplicationRelationship)
-        liveDeploymentView.setPaperSize(PaperSize.A5_Landscape)
+        liveDeploymentView.setPaperSize(PaperSize.A4_Landscape)
 
         liveDeploymentView.addAnimation(liveSinglePageApplication)
         liveDeploymentView.addAnimation(liveMobileApp)
         liveDeploymentView.addAnimation(liveWebApplication, liveApiApplication)
         liveDeploymentView.addAnimation(livePrimaryDatabase)
         liveDeploymentView.addAnimation(liveSecondaryDatabase)
+        liveDeploymentView.addAnimation(liveMainframeBankingSystem)
 
-        # colours, shapes and other diagram styling
+        ## colours, shapes and other diagram styling
         styles = views.getConfiguration.getStyles
         styles.addElementStyle(Tags.SOFTWARE_SYSTEM).background('#1168bd').color('#ffffff')
         styles.addElementStyle(Tags.CONTAINER).background('#438dd5').color('#ffffff')
@@ -230,9 +251,9 @@ module Structurizr
         styles.addElementStyle(FAILOVER_TAG).opacity(25)
         styles.addRelationshipStyle(FAILOVER_TAG).opacity(25).position(70)
 
-        # documentation
-        # - usually the documentation would be included from separate Markdown/AsciiDoc files, but this is just an example
-        template = Metal::Documentation::StructurizrDocumentationTemplate.new(workspace.to_java)
+        ## documentation
+        ## - usually the documentation would be included from separate Markdown#AsciiDoc files, but this is just an example
+        template = StructurizrDocumentationTemplate.new(workspace.to_java)
         template.addContextSection(internetBankingSystem, Format.Markdown,
                                    "Here is some context about the Internet Banking System...\n" \
                                            "![](embed:SystemLandscape)\n" \
@@ -256,8 +277,6 @@ module Structurizr
         template.addDeploymentSection(internetBankingSystem, Format.AsciiDoc,
                                       "Here is some information about the live deployment environment for the Internet Banking System...\n" \
                                               'image::embed:LiveDeployment[]')
-
-        refute_nil workspace.to_json
       end
     end
   end
