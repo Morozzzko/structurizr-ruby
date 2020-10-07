@@ -8,7 +8,9 @@
 module Structurizr
   module Examples
     class ViewpointsAndPerspectivesDocumentationExample < Minitest::Test
-      def test_definition
+      attr_reader :template
+
+      def setup
         workspace = Workspace.new('Documentation - Viewpoints and Perspectives', 'An empty software architecture document using the Viewpoints and Perspectives template.')
         model = workspace.getModel
         views = workspace.getViews
@@ -24,9 +26,10 @@ module Structurizr
         styles = views.getConfiguration.getStyles
         styles.addElementStyle(Tags.PERSON).shape(Shape.Person)
 
-        template = ViewpointsAndPerspectivesDocumentationTemplate.new(workspace.to_java)
+        @template = ViewpointsAndPerspectivesDocumentationTemplate.new(workspace.to_java)
+      end
 
-        ## this is the Markdown version
+      def test_markdown
         documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/viewpointsandperspectives/markdown'))
         template.addIntroductionSection(softwareSystem, java.io.File.new(documentationRoot, '01-introduction.md'))
         template.addGlossarySection(softwareSystem, java.io.File.new(documentationRoot, '02-glossary.md'))
@@ -35,16 +38,17 @@ module Structurizr
         template.addArchitecturalViewsSection(softwareSystem, java.io.File.new(documentationRoot, '05-architectural-views'))
         template.addSystemQualitiesSection(softwareSystem, java.io.File.new(documentationRoot, '06-system-qualities.md'))
         template.addAppendicesSection(softwareSystem, java.io.File.new(documentationRoot, '07-appendices.md'))
+      end
 
-        ## this is the AsciiDoc version
-        ##        documentationRoot  = File.new(".#structurizr-examples#src#com#structurizr#example#documentation#viewpointsandperspectives#asciidoc");
-        ##        template.addIntroductionSection(softwareSystem, File.new(documentationRoot, "01-introduction.adoc"));
-        ##        template.addGlossarySection(softwareSystem, File.new(documentationRoot, "02-glossary.adoc"));
-        ##        template.addSystemStakeholdersAndRequirementsSection(softwareSystem, File.new(documentationRoot, "03-system-stakeholders-and-requirements.adoc"));
-        ##        template.addArchitecturalForcesSection(softwareSystem, File.new(documentationRoot, "04-architectural-forces.adoc"));
-        ##        template.addArchitecturalViewsSection(softwareSystem, File.new(documentationRoot, "05-architectural-views"));
-        ##        template.addSystemQualitiesSection(softwareSystem, File.new(documentationRoot, "06-system-qualities.adoc"));
-        ##        template.addAppendicesSection(softwareSystem, File.new(documentationRoot, "07-appendices.adoc"));
+      def test_asciidoc
+        documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/viewpointsandperspectives/asciidoc'))
+        template.addIntroductionSection(softwareSystem, java.io.File.new(documentationRoot, '01-introduction.adoc'))
+        template.addGlossarySection(softwareSystem, java.io.File.new(documentationRoot, '02-glossary.adoc'))
+        template.addSystemStakeholdersAndRequirementsSection(softwareSystem, java.io.File.new(documentationRoot, '03-system-stakeholders-and-requirements.adoc'))
+        template.addArchitecturalForcesSection(softwareSystem, java.io.File.new(documentationRoot, '04-architectural-forces.adoc'))
+        template.addArchitecturalViewsSection(softwareSystem, java.io.File.new(documentationRoot, '05-architectural-views'))
+        template.addSystemQualitiesSection(softwareSystem, java.io.File.new(documentationRoot, '06-system-qualities.adoc'))
+        template.addAppendicesSection(softwareSystem, java.io.File.new(documentationRoot, '07-appendices.adoc'))
       end
     end
   end

@@ -8,7 +8,9 @@
 module Structurizr
   module Examples
     class StructurizrDocumentationExample < Minitest::Test
-      def test_definition
+      attr_reader :template
+
+      def setup
         workspace = Workspace.new('Documentation - Structurizr', 'An empty software architecture document using the Structurizr template.')
         model = workspace.getModel
         views = workspace.getViews
@@ -24,9 +26,10 @@ module Structurizr
         styles = views.getConfiguration.getStyles
         styles.addElementStyle(Tags.PERSON).shape(Shape.Person)
 
-        template = StructurizrDocumentationTemplate.new(workspace.to_java)
+        @template = StructurizrDocumentationTemplate.new(workspace.to_java)
+      end
 
-        ## this is the Markdown version
+      def test_markdown
         documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/structurizr/markdown'))
         template.addContextSection(softwareSystem, java.io.File.new(documentationRoot, '01-context.md'))
         template.addFunctionalOverviewSection(softwareSystem, java.io.File.new(documentationRoot, '02-functional-overview.md'))
@@ -40,21 +43,22 @@ module Structurizr
         template.addDevelopmentEnvironmentSection(softwareSystem, java.io.File.new(documentationRoot, '10-development-environment.md'))
         template.addOperationAndSupportSection(softwareSystem, java.io.File.new(documentationRoot, '11-operation-and-support.md'))
         template.addDecisionLogSection(softwareSystem, java.io.File.new(documentationRoot, '12-decision-log.md'))
+      end
 
-        ## this is the AsciiDoc version
-        ##        documentationRoot  = File.new(".#structurizr-examples#src#com#structurizr#example#documentation#structurizr#asciidoc");
-        ##        template.addContextSection(softwareSystem, File.new(documentationRoot, "01-context.adoc"));
-        ##        template.addFunctionalOverviewSection(softwareSystem, File.new(documentationRoot, "02-functional-overview.adoc"));
-        ##        template.addQualityAttributesSection(softwareSystem, File.new(documentationRoot, "03-quality-attributes.adoc"));
-        ##        template.addConstraintsSection(softwareSystem, File.new(documentationRoot, "04-constraints.adoc"));
-        ##        template.addPrinciplesSection(softwareSystem, File.new(documentationRoot, "05-principles.adoc"));
-        ##        template.addSoftwareArchitectureSection(softwareSystem, File.new(documentationRoot, "06-software-architecture.adoc"));
-        ##        template.addDataSection(softwareSystem, File.new(documentationRoot, "07-data.adoc"));
-        ##        template.addInfrastructureArchitectureSection(softwareSystem, File.new(documentationRoot, "08-infrastructure-architecture.adoc"));
-        ##        template.addDeploymentSection(softwareSystem, File.new(documentationRoot, "09-deployment.adoc"));
-        ##        template.addDevelopmentEnvironmentSection(softwareSystem, File.new(documentationRoot, "10-development-environment.adoc"));
-        ##        template.addOperationAndSupportSection(softwareSystem, File.new(documentationRoot, "11-operation-and-support.adoc"));
-        ##        template.addDecisionLogSection(softwareSystem, File.new(documentationRoot, "12-decision-log.adoc"));
+      def test_asciidoc
+        documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/structurizr/asciidoc'))
+        template.addContextSection(softwareSystem, java.io.File.new(documentationRoot, '01-context.adoc'))
+        template.addFunctionalOverviewSection(softwareSystem, java.io.File.new(documentationRoot, '02-functional-overview.adoc'))
+        template.addQualityAttributesSection(softwareSystem, java.io.File.new(documentationRoot, '03-quality-attributes.adoc'))
+        template.addConstraintsSection(softwareSystem, java.io.File.new(documentationRoot, '04-constraints.adoc'))
+        template.addPrinciplesSection(softwareSystem, java.io.File.new(documentationRoot, '05-principles.adoc'))
+        template.addSoftwareArchitectureSection(softwareSystem, java.io.File.new(documentationRoot, '06-software-architecture.adoc'))
+        template.addDataSection(softwareSystem, java.io.File.new(documentationRoot, '07-data.adoc'))
+        template.addInfrastructureArchitectureSection(softwareSystem, java.io.File.new(documentationRoot, '08-infrastructure-architecture.adoc'))
+        template.addDeploymentSection(softwareSystem, java.io.File.new(documentationRoot, '09-deployment.adoc'))
+        template.addDevelopmentEnvironmentSection(softwareSystem, java.io.File.new(documentationRoot, '10-development-environment.adoc'))
+        template.addOperationAndSupportSection(softwareSystem, java.io.File.new(documentationRoot, '11-operation-and-support.adoc'))
+        template.addDecisionLogSection(softwareSystem, java.io.File.new(documentationRoot, '12-decision-log.adoc'))
       end
     end
   end
