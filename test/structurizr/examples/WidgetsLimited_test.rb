@@ -30,11 +30,29 @@ module Structurizr
         braintreePayments.setUrl('https://www.braintreepayments.com')
         jerseyPost = model.addSoftwareSystem(Location.External, 'Jersey Post', 'Calculates worldwide shipping costs for packages.')
 
-        #         model.getPeople().stream().filter(p -> p.getLocation() == Location.External).forEach(p -> p.addTags(EXTERNAL_TAG)); # TODO: rewrite to Ruby arrays
-        #         model.getPeople().stream().filter(p -> p.getLocation() == Location.Internal).forEach(p -> p.addTags(INTERNAL_TAG)); # TODO: rewrite to Ruby arrays
+        @model.get_people.select do |relationship|
+          relationship.get_location == Location.External
+        end.each do |relationship|
+          relationship.addTags(EXTERNAL_TAG)
+        end
 
-        #         model.getSoftwareSystems().stream().filter(ss -> ss.getLocation() == Location.External).forEach(ss -> ss.addTags(EXTERNAL_TAG)); # TODO: rewrite to Ruby arrays
-        #         model.getSoftwareSystems().stream().filter(ss -> ss.getLocation() == Location.Internal).forEach(ss -> ss.addTags(INTERNAL_TAG)); # TODO: rewrite to Ruby arrays
+        @model.get_people.select do |relationship|
+          relationship.get_location == Location.Internal
+        end.each do |relationship|
+          relationship.addTags(INTERNAL_TAG)
+        end
+
+        @model.get_software_systems.select do |relationship|
+          relationship.get_location == Location.External
+        end.each do |relationship|
+          relationship.addTags(EXTERNAL_TAG)
+        end
+
+        @model.get_software_systems.select do |relationship|
+          relationship.get_location == Location.Internal
+        end.each do |relationship|
+          relationship.addTags(INTERNAL_TAG)
+        end
 
         customer.interactsWith(customerServiceUser, 'Asks questions to', 'Telephone')
         customerServiceUser.uses(ecommerceSystem, 'Looks up order information using')
