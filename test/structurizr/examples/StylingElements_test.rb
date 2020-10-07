@@ -8,7 +8,9 @@
 module Structurizr
   module Examples
     class StylingElements < Minitest::Test
-      def test_definition
+      attr_reader :styles
+
+      def setup
         workspace = Workspace.new('Styling Elements', 'This is a model of my software system.')
         model = workspace.getModel
 
@@ -16,6 +18,7 @@ module Structurizr
         softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
         webApplication = softwareSystem.addContainer('Web Application', 'My web application.', 'Java and Spring MVC')
         database = softwareSystem.addContainer('Database', 'My database.', 'Relational database schema')
+        database.addTags('Database')
         user.uses(webApplication, 'Uses', 'HTTPS')
         webApplication.uses(database, 'Reads from and writes to', 'JDBC')
 
@@ -24,21 +27,23 @@ module Structurizr
         containerView.addAllElements
 
         styles = workspace.getViews.getConfiguration.getStyles
+      end
 
-        ## example 1
-        ##        styles.addElementStyle(Tags.ELEMENT).background("#438dd5").color("#ffffff");
+      def test_example_one
+        styles.addElementStyle(Tags.ELEMENT).background('#438dd5').color('#ffffff')
+      end
 
-        ## example 2
-        ##        styles.addElementStyle(Tags.ELEMENT).color("#ffffff");
-        ##        styles.addElementStyle(Tags.PERSON).background("#08427b");
-        ##        styles.addElementStyle(Tags.CONTAINER).background("#438dd5");
+      def test_example_two
+        styles.addElementStyle(Tags.ELEMENT).color('#ffffff')
+        styles.addElementStyle(Tags.PERSON).background('#08427b')
+        styles.addElementStyle(Tags.CONTAINER).background('#438dd5')
+      end
 
-        ## example 3
-        ##        styles.addElementStyle(Tags.ELEMENT).color("#ffffff");
-        ##        styles.addElementStyle(Tags.PERSON).background("#08427b").shape(Shape.Person);
-        ##        styles.addElementStyle(Tags.CONTAINER).background("#438dd5");
-        ##        database.addTags("Database");
-        ##        styles.addElementStyle("Database").shape(Shape.Cylinder);
+      def test_example_three
+        styles.addElementStyle(Tags.ELEMENT).color('#ffffff')
+        styles.addElementStyle(Tags.PERSON).background('#08427b').shape(Shape.Person)
+        styles.addElementStyle(Tags.CONTAINER).background('#438dd5')
+        styles.addElementStyle('Database').shape(Shape.Cylinder)
       end
     end
   end
