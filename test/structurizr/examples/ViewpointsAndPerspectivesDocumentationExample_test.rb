@@ -3,7 +3,6 @@
 ###
 # An empty software architecture document using the "Viewpoints and Perspectives" template.
 #
-# See https:##structurizr.com#share#36371#documentation for the live version.
 # Source: https://github.com/structurizr/java/blob/e0db7582dc6dc7053ab995d7fff44c27d021312e/structurizr-examples/src/com/structurizr/example/ViewpointsAndPerspectivesDocumentationExample.java
 # Updated at: 2017-07-25
 module Structurizr

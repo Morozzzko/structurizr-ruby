@@ -3,7 +3,6 @@
 ###
 # This workspace contains a number of diagrams for a fictional reseller of widgets online.
 #
-# You can see the workspace online at https:##structurizr.com#public#14471
 # Source: https://github.com/structurizr/java/blob/9efb5b39ab2185aab4ea884495ada38c32c47f31/structurizr-examples/src/com/structurizr/example/WidgetsLimited.java
 # Updated at: 2018-06-09
 module Structurizr

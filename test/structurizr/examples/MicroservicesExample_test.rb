@@ -4,7 +4,6 @@
 # A simple example of what a microservices architecture might look like. This workspace also
 # includes a dynamic view that demonstrates parallel sequences of events.
 #
-# The live version of the diagrams can be found at https:##structurizr.com#public#4241
 # Source: https://github.com/structurizr/java/blob/de69976fcef04db6afceea2d9c98842d2d8c5736/structurizr-examples/src/com/structurizr/example/MicroservicesExample.java
 # Updated at: 2018-08-07
 module Structurizr

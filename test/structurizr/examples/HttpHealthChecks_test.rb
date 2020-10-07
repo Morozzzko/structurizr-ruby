@@ -3,7 +3,6 @@
 ###
 # This is an example of how to use the HTTP-based health checks feature.
 #
-# You can see the health checks running at https:##structurizr.com#share#39441#health
 # Source: https://github.com/structurizr/java/blob/90d63149039bdb6dc025fcf9d67410d852f9a59f/structurizr-examples/src/com/structurizr/example/HttpHealthChecks.java
 # Updated at: 2018-06-21
 module Structurizr
@@ -30,8 +29,8 @@ module Structurizr
                                                 .add(database)
 
         ## add health checks to the container instances, which return a simple HTTP 200 to say everything is okay
-        liveWebApplication.addHealthCheck('Web Application is running', 'https:##www.structurizr.com#health')
-        liveDatabaseInstance.addHealthCheck('Database is accessible from Web Application', 'https:##www.structurizr.com#health#database')
+        liveWebApplication.addHealthCheck('Web Application is running', 'https://www.structurizr.com/health')
+        liveDatabaseInstance.addHealthCheck('Database is accessible from Web Application', 'https://www.structurizr.com/health/database')
 
         ## the pass#fail status from the health checks is used to supplement any deployment views that include the container instances that have health checks defined
         deploymentView = views.createDeploymentView(structurizr, 'Deployment', 'A deployment diagram showing the live environment.')

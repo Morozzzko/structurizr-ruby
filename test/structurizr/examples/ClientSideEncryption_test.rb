@@ -3,7 +3,6 @@
 ###
 # This is an example of how to use client-side encryption.
 #
-# You can see the workspace online at https:##structurizr.com#share#41
 # (the passphrase is "password")
 # Source: https://github.com/structurizr/java/blob/71e3fc9f8750882e264800a3c394c1eb5bbc8c16/structurizr-examples/src/com/structurizr/example/ClientSideEncryption.java
 # Updated at: 2017-07-19

@@ -3,7 +3,6 @@
 ###
 # An example of how to use filtered views to show "before" and "after" views of a software system.
 #
-# You can see the live diagrams at https:##structurizr.com#public#19911
 # Source: https://github.com/structurizr/java/blob/1ddbb44e7a0c5123fbecddfe61837980e9bbb8dd/structurizr-examples/src/com/structurizr/example/FilteredViews.java
 # Updated at: 2018-01-31
 module Structurizr

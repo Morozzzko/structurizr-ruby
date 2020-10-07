@@ -4,7 +4,6 @@
 # A "getting started" example that illustrates how to
 # create a software architecture diagram using code.
 #
-# The live workspace is available to view at https:##structurizr.com#share#25441
 # Source: https://github.com/structurizr/java/blob/533cefe8d8ac4628f0c604b106a2c1fe56082d13/structurizr-examples/src/com/structurizr/example/GettingStarted.java
 # Updated at: 2017-07-13
 module Structurizr

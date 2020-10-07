@@ -3,7 +3,6 @@
 ###
 # An example of how to style relationships on diagrams.
 #
-# The live workspace is available to view at https:##structurizr.com#share#36131
 # Source: https://github.com/structurizr/java/blob/3223f0110e0f3f0bb49b22ee43351b9b07ad3943/structurizr-examples/src/com/structurizr/example/StylingRelationships.java
 # Updated at: 2017-07-15
 module Structurizr

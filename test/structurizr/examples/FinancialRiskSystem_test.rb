@@ -2,9 +2,8 @@
 
 ###
 # This is a simple (incomplete) example C4 model based upon the financial risk system
-# architecture kata, which can be found at http:##bit.ly#sa4d-risksystem
+# architecture kata, which can be found at http://bit.ly/sa4d-risksystem
 #
-# You can see the workspace online at https:##structurizr.com#public#31
 # Source: https://github.com/structurizr/java/blob/829738a1c7fea2e786239958a891599135c0d906/structurizr-examples/src/com/structurizr/example/FinancialRiskSystem.java
 # Updated at: 2017-07-23
 module Structurizr
@@ -13,7 +12,7 @@ module Structurizr
       TAG_ALERT = 'Alert'
 
       def test_definition
-        workspace = Workspace.new('Financial Risk System', 'This is a simple (incomplete) example C4 model based upon the financial risk system architecture kata, which can be found at http:##bit.ly#sa4d-risksystem')
+        workspace = Workspace.new('Financial Risk System', 'This is a simple (incomplete) example C4 model based upon the financial risk system architecture kata, which can be found at http://bit.ly/sa4d-risksystem')
         model = workspace.getModel
 
         financialRiskSystem = model.addSoftwareSystem('Financial Risk System', "Calculates the bank's exposure to risk for product X.")

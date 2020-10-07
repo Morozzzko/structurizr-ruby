@@ -10,7 +10,6 @@
 # <#ul>
 #
 # <p>
-#   You can see the live workspace at https:##structurizr.com#share#35031
 # <#p>
 # Source: https://github.com/structurizr/java/blob/2b3e0828128ae9dfc6420a39f6ad9f5ecd987450/structurizr-examples/src/com/structurizr/example/CorporateBranding.java
 # Updated at: 2018-09-03

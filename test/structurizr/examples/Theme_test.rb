@@ -3,7 +3,6 @@
 ###
 # This is an example of how to use an external theme.
 #
-# The live workspace is available to view at https://structurizr.com/share/38898
 # Source: https://github.com/structurizr/java/blob/4404b72a7283f113cb03363d581e8460711e0fd8/structurizr-examples/src/com/structurizr/example/Theme.java
 # Updated at: 2020-01-05
 module Structurizr

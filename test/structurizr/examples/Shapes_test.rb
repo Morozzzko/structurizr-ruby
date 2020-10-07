@@ -3,7 +3,6 @@
 ###
 # An example illustrating all of the shapes available in Structurizr.
 #
-# The live workspace is available to view at https:##structurizr.com#share#12541
 # Source: https://github.com/structurizr/java/blob/1689bf44fb907df7a375ab2c0f570938b8adf2e6/structurizr-examples/src/com/structurizr/example/Shapes.java
 # Updated at: 2020-06-05
 module Structurizr
