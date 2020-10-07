@@ -2,7 +2,9 @@
 
 require 'simplecov'
 require 'pry'
-SimpleCov.start
+SimpleCov.start do
+  add_filter %r{^/test/}
+end
 
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'structurizr'

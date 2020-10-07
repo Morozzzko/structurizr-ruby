@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'structurizr'
 require 'test_helper'
 
 Dir[File.join(__dir__, '../test/**/*_test.rb')].sort.each do |test_path|
