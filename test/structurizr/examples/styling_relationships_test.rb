@@ -29,7 +29,7 @@ module Structurizr
       end
 
       def test_example_one
-        @styles.addRelationshipStyle(Tags.RELATIONSHIP).color('#ff0000')
+        @styles.addRelationshipStyle(Tags::RELATIONSHIP).color('#ff0000')
       end
 
       def test_example_two

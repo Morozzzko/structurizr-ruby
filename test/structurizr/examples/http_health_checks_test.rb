@@ -37,8 +37,8 @@ module Structurizr
         deploymentView.setEnvironment('Live')
         deploymentView.addAllDeploymentNodes
 
-        views.getConfiguration.getStyles.addElementStyle(Tags.ELEMENT).color('#ffffff')
-        views.getConfiguration.getStyles.addElementStyle(DATABASE_TAG).shape(Shape.Cylinder)
+        views.getConfiguration.getStyles.addElementStyle(Tags::ELEMENT).color('#ffffff')
+        views.getConfiguration.getStyles.addElementStyle(DATABASE_TAG).shape(Shape::Cylinder)
       end
     end
   end

@@ -24,7 +24,7 @@ module Structurizr
         contextView.addAllPeople
 
         styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags.PERSON).shape(Shape.Person)
+        styles.addElementStyle(Tags::PERSON).shape(Shape::Person)
 
         @template = Arc42DocumentationTemplate.new(workspace.to_java)
       end

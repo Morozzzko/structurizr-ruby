@@ -30,20 +30,20 @@ module Structurizr
       end
 
       def test_example_one
-        styles.addElementStyle(Tags.ELEMENT).background('#438dd5').color('#ffffff')
+        styles.addElementStyle(Tags::ELEMENT).background('#438dd5').color('#ffffff')
       end
 
       def test_example_two
-        styles.addElementStyle(Tags.ELEMENT).color('#ffffff')
-        styles.addElementStyle(Tags.PERSON).background('#08427b')
-        styles.addElementStyle(Tags.CONTAINER).background('#438dd5')
+        styles.addElementStyle(Tags::ELEMENT).color('#ffffff')
+        styles.addElementStyle(Tags::PERSON).background('#08427b')
+        styles.addElementStyle(Tags::CONTAINER).background('#438dd5')
       end
 
       def test_example_three
-        styles.addElementStyle(Tags.ELEMENT).color('#ffffff')
-        styles.addElementStyle(Tags.PERSON).background('#08427b').shape(Shape.Person)
-        styles.addElementStyle(Tags.CONTAINER).background('#438dd5')
-        styles.addElementStyle('Database').shape(Shape.Cylinder)
+        styles.addElementStyle(Tags::ELEMENT).color('#ffffff')
+        styles.addElementStyle(Tags::PERSON).background('#08427b').shape(Shape::Person)
+        styles.addElementStyle(Tags::CONTAINER).background('#438dd5')
+        styles.addElementStyle('Database').shape(Shape::Cylinder)
       end
     end
   end

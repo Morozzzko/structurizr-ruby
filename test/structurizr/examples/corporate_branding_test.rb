@@ -30,10 +30,10 @@ module Structurizr
         contextView.addAllPeople
 
         styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags.PERSON).shape(Shape.Person)
+        styles.addElementStyle(Tags::PERSON).shape(Shape::Person)
 
         template = StructurizrDocumentationTemplate.new(workspace.to_java)
-        template.addContextSection(softwareSystem, Format.Markdown, "Here is some context about the software system...\n\n![](embed:SystemContext)")
+        template.addContextSection(softwareSystem, Format::Markdown, "Here is some context about the software system...\n\n![](embed:SystemContext)")
 
         branding = views.getConfiguration.getBranding
         branding.setLogo(ImageUtils.getImageAsDataUri(java.io.File.new(File.join(__dir__, 'img/structurizr-logo.png'))))

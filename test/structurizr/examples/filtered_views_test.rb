@@ -32,9 +32,9 @@ module Structurizr
         views.createFilteredView(systemLandscapeView, 'FutureState', 'The future state system landscape after Software System B is live.', FilterMode.Exclude, CURRENT_STATE)
 
         styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags.ELEMENT).color('#ffffff')
-        styles.addElementStyle(Tags.SOFTWARE_SYSTEM).background('#91a437').shape(Shape.RoundedBox)
-        styles.addElementStyle(Tags.PERSON).background('#6a7b15').shape(Shape.Person)
+        styles.addElementStyle(Tags::ELEMENT).color('#ffffff')
+        styles.addElementStyle(Tags::SOFTWARE_SYSTEM).background('#91a437').shape(Shape::RoundedBox)
+        styles.addElementStyle(Tags::PERSON).background('#6a7b15').shape(Shape::Person)
       end
     end
   end

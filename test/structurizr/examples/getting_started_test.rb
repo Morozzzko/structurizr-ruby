@@ -27,8 +27,8 @@ module Structurizr
 
         ## add some styling to the diagram elements
         styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags.SOFTWARE_SYSTEM).background('#1168bd').color('#ffffff')
-        styles.addElementStyle(Tags.PERSON).background('#08427b').color('#ffffff').shape(Shape.Person)
+        styles.addElementStyle(Tags::SOFTWARE_SYSTEM).background('#1168bd').color('#ffffff')
+        styles.addElementStyle(Tags::PERSON).background('#08427b').color('#ffffff').shape(Shape::Person)
 
         ## upload to structurizr.com (you'll need your own workspace ID, API key and API secret)
       end
