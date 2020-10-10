@@ -12,33 +12,33 @@ module Structurizr
 
       def test_definition
         workspace = Workspace.new('HTTP-based health checks example', 'An example of how to use the HTTP-based health checks feature')
-        model = workspace.getModel
-        views = workspace.getViews
+        model = workspace.get_model
+        views = workspace.get_views
 
-        structurizr = model.addSoftwareSystem('Structurizr', 'A publishing platform for software architecture diagrams and documentation based upon the C4 model.')
-        webApplication = structurizr.addContainer('structurizr.com', 'Provides all of the server-side functionality of Structurizr, serving static and dynamic content to users.', 'Java and Spring MVC')
-        database = structurizr.addContainer('Database', 'Stores information about users, workspaces, etc.', 'Relational Database Schema')
-        database.addTags(DATABASE_TAG)
+        structurizr = model.add_software_system('Structurizr', 'A publishing platform for software architecture diagrams and documentation based upon the C4 model.')
+        webApplication = structurizr.add_container('structurizr.com', 'Provides all of the server-side functionality of Structurizr, serving static and dynamic content to users.', 'Java and Spring MVC')
+        database = structurizr.add_container('Database', 'Stores information about users, workspaces, etc.', 'Relational Database Schema')
+        database.add_tags(DATABASE_TAG)
         webApplication.uses(database, 'Reads from and writes to', 'JDBC')
 
-        amazonWebServices = model.addDeploymentNode('Amazon Web Services', '', 'us-east-1')
-        pivotalWebServices = amazonWebServices.addDeploymentNode('Pivotal Web Services', 'Platform as a Service provider.', 'Cloud Foundry')
-        liveWebApplication = pivotalWebServices.addDeploymentNode('www.structurizr.com', 'An open source Java EE web server.', 'Apache Tomcat')
+        amazonWebServices = model.add_deployment_node('Amazon Web Services', '', 'us-east-1')
+        pivotalWebServices = amazonWebServices.add_deployment_node('Pivotal Web Services', 'Platform as a Service provider.', 'Cloud Foundry')
+        liveWebApplication = pivotalWebServices.add_deployment_node('www.structurizr.com', 'An open source Java EE web server.', 'Apache Tomcat')
                                                .add(webApplication)
-        liveDatabaseInstance = amazonWebServices.addDeploymentNode('Amazon RDS', 'Database as a Service provider.', 'MySQL')
+        liveDatabaseInstance = amazonWebServices.add_deployment_node('Amazon RDS', 'Database as a Service provider.', 'MySQL')
                                                 .add(database)
 
         ## add health checks to the container instances, which return a simple HTTP 200 to say everything is okay
-        liveWebApplication.addHealthCheck('Web Application is running', 'https://www.structurizr.com/health')
-        liveDatabaseInstance.addHealthCheck('Database is accessible from Web Application', 'https://www.structurizr.com/health/database')
+        liveWebApplication.add_health_check('Web Application is running', 'https://www.structurizr.com/health')
+        liveDatabaseInstance.add_health_check('Database is accessible from Web Application', 'https://www.structurizr.com/health/database')
 
         ## the pass#fail status from the health checks is used to supplement any deployment views that include the container instances that have health checks defined
-        deploymentView = views.createDeploymentView(structurizr, 'Deployment', 'A deployment diagram showing the live environment.')
-        deploymentView.setEnvironment('Live')
-        deploymentView.addAllDeploymentNodes
+        deploymentView = views.create_deployment_view(structurizr, 'Deployment', 'A deployment diagram showing the live environment.')
+        deploymentView.set_environment('Live')
+        deploymentView.add_all_deployment_nodes
 
-        views.getConfiguration.getStyles.addElementStyle(Tags::ELEMENT).color('#ffffff')
-        views.getConfiguration.getStyles.addElementStyle(DATABASE_TAG).shape(Shape::Cylinder)
+        views.get_configuration.get_styles.add_element_style(Tags::ELEMENT).color('#ffffff')
+        views.get_configuration.get_styles.add_element_style(DATABASE_TAG).shape(Shape::Cylinder)
       end
     end
   end

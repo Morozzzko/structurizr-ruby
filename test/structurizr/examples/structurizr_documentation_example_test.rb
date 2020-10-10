@@ -12,53 +12,53 @@ module Structurizr
 
       def setup
         workspace = Workspace.new('Documentation - Structurizr', 'An empty software architecture document using the Structurizr template.')
-        model = workspace.getModel
-        views = workspace.getViews
+        model = workspace.get_model
+        views = workspace.get_views
 
-        user = model.addPerson('User', 'A user of my software system.')
-        @softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
-        user.uses(softwareSystem, 'Uses')
+        user = model.add_person('User', 'A user of my software system.')
+        @softwareSystem = model.add_software_system('Software System', 'My software system.')
+        user.uses(software_system, 'Uses')
 
-        contextView = views.createSystemContextView(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
-        contextView.addAllSoftwareSystems
-        contextView.addAllPeople
+        contextView = views.create_system_context_view(software_system, 'SystemContext', 'An example of a System Context diagram.')
+        contextView.add_all_software_systems
+        contextView.add_all_people
 
-        styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags::PERSON).shape(Shape::Person)
+        styles = views.get_configuration.get_styles
+        styles.add_element_style(Tags::PERSON).shape(Shape::Person)
 
         @template = StructurizrDocumentationTemplate.new(workspace.to_java)
       end
 
       def test_markdown
-        documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/structurizr/markdown'))
-        template.addContextSection(softwareSystem, java.io.File.new(documentationRoot, '01-context.md'))
-        template.addFunctionalOverviewSection(softwareSystem, java.io.File.new(documentationRoot, '02-functional-overview.md'))
-        template.addQualityAttributesSection(softwareSystem, java.io.File.new(documentationRoot, '03-quality-attributes.md'))
-        template.addConstraintsSection(softwareSystem, java.io.File.new(documentationRoot, '04-constraints.md'))
-        template.addPrinciplesSection(softwareSystem, java.io.File.new(documentationRoot, '05-principles.md'))
-        template.addSoftwareArchitectureSection(softwareSystem, java.io.File.new(documentationRoot, '06-software-architecture.md'))
-        template.addDataSection(softwareSystem, java.io.File.new(documentationRoot, '07-data.md'))
-        template.addInfrastructureArchitectureSection(softwareSystem, java.io.File.new(documentationRoot, '08-infrastructure-architecture.md'))
-        template.addDeploymentSection(softwareSystem, java.io.File.new(documentationRoot, '09-deployment.md'))
-        template.addDevelopmentEnvironmentSection(softwareSystem, java.io.File.new(documentationRoot, '10-development-environment.md'))
-        template.addOperationAndSupportSection(softwareSystem, java.io.File.new(documentationRoot, '11-operation-and-support.md'))
-        template.addDecisionLogSection(softwareSystem, java.io.File.new(documentationRoot, '12-decision-log.md'))
+        documentationRoot = java.io.file.new(File.join(__dir__, 'documentation/structurizr/markdown'))
+        template.add_context_section(software_system, java.io.file.new(documentationRoot, '01-context.md'))
+        template.add_functional_overview_section(software_system, java.io.file.new(documentationRoot, '02-functional-overview.md'))
+        template.add_quality_attributes_section(software_system, java.io.file.new(documentationRoot, '03-quality-attributes.md'))
+        template.add_constraints_section(software_system, java.io.file.new(documentationRoot, '04-constraints.md'))
+        template.add_principles_section(software_system, java.io.file.new(documentationRoot, '05-principles.md'))
+        template.add_software_architecture_section(software_system, java.io.file.new(documentationRoot, '06-software-architecture.md'))
+        template.add_data_section(software_system, java.io.file.new(documentationRoot, '07-data.md'))
+        template.add_infrastructure_architecture_section(software_system, java.io.file.new(documentationRoot, '08-infrastructure-architecture.md'))
+        template.add_deployment_section(software_system, java.io.file.new(documentationRoot, '09-deployment.md'))
+        template.add_development_environment_section(software_system, java.io.file.new(documentationRoot, '10-development-environment.md'))
+        template.add_operation_and_support_section(software_system, java.io.file.new(documentationRoot, '11-operation-and-support.md'))
+        template.add_decision_log_section(software_system, java.io.file.new(documentationRoot, '12-decision-log.md'))
       end
 
       def test_asciidoc
-        documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/structurizr/asciidoc'))
-        template.addContextSection(softwareSystem, java.io.File.new(documentationRoot, '01-context.adoc'))
-        template.addFunctionalOverviewSection(softwareSystem, java.io.File.new(documentationRoot, '02-functional-overview.adoc'))
-        template.addQualityAttributesSection(softwareSystem, java.io.File.new(documentationRoot, '03-quality-attributes.adoc'))
-        template.addConstraintsSection(softwareSystem, java.io.File.new(documentationRoot, '04-constraints.adoc'))
-        template.addPrinciplesSection(softwareSystem, java.io.File.new(documentationRoot, '05-principles.adoc'))
-        template.addSoftwareArchitectureSection(softwareSystem, java.io.File.new(documentationRoot, '06-software-architecture.adoc'))
-        template.addDataSection(softwareSystem, java.io.File.new(documentationRoot, '07-data.adoc'))
-        template.addInfrastructureArchitectureSection(softwareSystem, java.io.File.new(documentationRoot, '08-infrastructure-architecture.adoc'))
-        template.addDeploymentSection(softwareSystem, java.io.File.new(documentationRoot, '09-deployment.adoc'))
-        template.addDevelopmentEnvironmentSection(softwareSystem, java.io.File.new(documentationRoot, '10-development-environment.adoc'))
-        template.addOperationAndSupportSection(softwareSystem, java.io.File.new(documentationRoot, '11-operation-and-support.adoc'))
-        template.addDecisionLogSection(softwareSystem, java.io.File.new(documentationRoot, '12-decision-log.adoc'))
+        documentationRoot = java.io.file.new(File.join(__dir__, 'documentation/structurizr/asciidoc'))
+        template.add_context_section(software_system, java.io.file.new(documentationRoot, '01-context.adoc'))
+        template.add_functional_overview_section(software_system, java.io.file.new(documentationRoot, '02-functional-overview.adoc'))
+        template.add_quality_attributes_section(software_system, java.io.file.new(documentationRoot, '03-quality-attributes.adoc'))
+        template.add_constraints_section(software_system, java.io.file.new(documentationRoot, '04-constraints.adoc'))
+        template.add_principles_section(software_system, java.io.file.new(documentationRoot, '05-principles.adoc'))
+        template.add_software_architecture_section(software_system, java.io.file.new(documentationRoot, '06-software-architecture.adoc'))
+        template.add_data_section(software_system, java.io.file.new(documentationRoot, '07-data.adoc'))
+        template.add_infrastructure_architecture_section(software_system, java.io.file.new(documentationRoot, '08-infrastructure-architecture.adoc'))
+        template.add_deployment_section(software_system, java.io.file.new(documentationRoot, '09-deployment.adoc'))
+        template.add_development_environment_section(software_system, java.io.file.new(documentationRoot, '10-development-environment.adoc'))
+        template.add_operation_and_support_section(software_system, java.io.file.new(documentationRoot, '11-operation-and-support.adoc'))
+        template.add_decision_log_section(software_system, java.io.file.new(documentationRoot, '12-decision-log.adoc'))
       end
     end
   end

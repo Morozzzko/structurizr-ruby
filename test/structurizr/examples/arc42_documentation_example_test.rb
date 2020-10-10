@@ -12,53 +12,53 @@ module Structurizr
 
       def setup
         workspace = Workspace.new('Documentation - arc42', 'An empty software architecture document using the arc42 template.')
-        model = workspace.getModel
-        views = workspace.getViews
+        model = workspace.get_model
+        views = workspace.get_views
 
-        user = model.addPerson('User', 'A user of my software system.')
-        @softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
-        user.uses(softwareSystem, 'Uses')
+        user = model.add_person('User', 'A user of my software system.')
+        @softwareSystem = model.add_software_system('Software System', 'My software system.')
+        user.uses(software_system, 'Uses')
 
-        contextView = views.createSystemContextView(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
-        contextView.addAllSoftwareSystems
-        contextView.addAllPeople
+        contextView = views.create_system_context_view(software_system, 'SystemContext', 'An example of a System Context diagram.')
+        contextView.add_all_software_systems
+        contextView.add_all_people
 
-        styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags::PERSON).shape(Shape::Person)
+        styles = views.get_configuration.get_styles
+        styles.add_element_style(Tags::PERSON).shape(Shape::Person)
 
         @template = Arc42DocumentationTemplate.new(workspace.to_java)
       end
 
       def test_markdown
         documentationRoot = File.join(__dir__, 'documentation/arc42/markdown')
-        template.addIntroductionAndGoalsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '01-introduction-and-goals.md')))
-        template.addConstraintsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '02-architecture-constraints.md')))
-        template.addContextAndScopeSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '03-system-scope-and-context.md')))
-        template.addSolutionStrategySection(softwareSystem, java.io.File.new(File.join(documentationRoot, '04-solution-strategy.md')))
-        template.addBuildingBlockViewSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '05-building-block-view.md')))
-        template.addRuntimeViewSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '06-runtime-view.md')))
-        template.addDeploymentViewSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '07-deployment-view.md')))
-        template.addCrosscuttingConceptsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '08-crosscutting-concepts.md')))
-        template.addArchitecturalDecisionsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '09-architecture-decisions.md')))
-        template.addRisksAndTechnicalDebtSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '10-quality-requirements.md')))
-        template.addQualityRequirementsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '11-risks-and-technical-debt.md')))
-        template.addGlossarySection(softwareSystem, java.io.File.new(File.join(documentationRoot, '12-glossary.md')))
+        template.add_introduction_and_goals_section(software_system, java.io.file.new(File.join(documentationRoot, '01-introduction-and-goals.md')))
+        template.add_constraints_section(software_system, java.io.file.new(File.join(documentationRoot, '02-architecture-constraints.md')))
+        template.add_context_and_scope_section(software_system, java.io.file.new(File.join(documentationRoot, '03-system-scope-and-context.md')))
+        template.add_solution_strategy_section(software_system, java.io.file.new(File.join(documentationRoot, '04-solution-strategy.md')))
+        template.add_building_block_view_section(software_system, java.io.file.new(File.join(documentationRoot, '05-building-block-view.md')))
+        template.add_runtime_view_section(software_system, java.io.file.new(File.join(documentationRoot, '06-runtime-view.md')))
+        template.add_deployment_view_section(software_system, java.io.file.new(File.join(documentationRoot, '07-deployment-view.md')))
+        template.add_crosscutting_concepts_section(software_system, java.io.file.new(File.join(documentationRoot, '08-crosscutting-concepts.md')))
+        template.add_architectural_decisions_section(software_system, java.io.file.new(File.join(documentationRoot, '09-architecture-decisions.md')))
+        template.add_risks_and_technical_debt_section(software_system, java.io.file.new(File.join(documentationRoot, '10-quality-requirements.md')))
+        template.add_quality_requirements_section(software_system, java.io.file.new(File.join(documentationRoot, '11-risks-and-technical-debt.md')))
+        template.add_glossary_section(software_system, java.io.file.new(File.join(documentationRoot, '12-glossary.md')))
       end
 
       def test_asciidoc
         documentationRoot = File.join(__dir__, 'documentation/arc42/asciidoc')
-        template.addIntroductionAndGoalsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '01-introduction-and-goals.adoc')))
-        template.addConstraintsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '02-architecture-constraints.adoc')))
-        template.addContextAndScopeSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '03-system-scope-and-context.adoc')))
-        template.addSolutionStrategySection(softwareSystem, java.io.File.new(File.join(documentationRoot, '04-solution-strategy.adoc')))
-        template.addBuildingBlockViewSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '05-building-block-view.adoc')))
-        template.addRuntimeViewSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '06-runtime-view.adoc')))
-        template.addDeploymentViewSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '07-deployment-view.adoc')))
-        template.addCrosscuttingConceptsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '08-crosscutting-concepts.adoc')))
-        template.addArchitecturalDecisionsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '09-architecture-decisions.adoc')))
-        template.addRisksAndTechnicalDebtSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '10-quality-requirements.adoc')))
-        template.addQualityRequirementsSection(softwareSystem, java.io.File.new(File.join(documentationRoot, '11-risks-and-technical-debt.adoc')))
-        template.addGlossarySection(softwareSystem, java.io.File.new(File.join(documentationRoot, '12-glossary.adoc')))
+        template.add_introduction_and_goals_section(software_system, java.io.file.new(File.join(documentationRoot, '01-introduction-and-goals.adoc')))
+        template.add_constraints_section(software_system, java.io.file.new(File.join(documentationRoot, '02-architecture-constraints.adoc')))
+        template.add_context_and_scope_section(software_system, java.io.file.new(File.join(documentationRoot, '03-system-scope-and-context.adoc')))
+        template.add_solution_strategy_section(software_system, java.io.file.new(File.join(documentationRoot, '04-solution-strategy.adoc')))
+        template.add_building_block_view_section(software_system, java.io.file.new(File.join(documentationRoot, '05-building-block-view.adoc')))
+        template.add_runtime_view_section(software_system, java.io.file.new(File.join(documentationRoot, '06-runtime-view.adoc')))
+        template.add_deployment_view_section(software_system, java.io.file.new(File.join(documentationRoot, '07-deployment-view.adoc')))
+        template.add_crosscutting_concepts_section(software_system, java.io.file.new(File.join(documentationRoot, '08-crosscutting-concepts.adoc')))
+        template.add_architectural_decisions_section(software_system, java.io.file.new(File.join(documentationRoot, '09-architecture-decisions.adoc')))
+        template.add_risks_and_technical_debt_section(software_system, java.io.file.new(File.join(documentationRoot, '10-quality-requirements.adoc')))
+        template.add_quality_requirements_section(software_system, java.io.file.new(File.join(documentationRoot, '11-risks-and-technical-debt.adoc')))
+        template.add_glossary_section(software_system, java.io.file.new(File.join(documentationRoot, '12-glossary.adoc')))
       end
     end
   end

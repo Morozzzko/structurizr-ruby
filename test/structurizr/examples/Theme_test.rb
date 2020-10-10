@@ -10,19 +10,19 @@ module Structurizr
     class Theme < Minitest::Test
       def test_definition
         workspace = Workspace.new('Theme', 'This is a model of my software system.')
-        model = workspace.getModel
+        model = workspace.get_model
 
-        user = model.addPerson('User', 'A user of my software system.')
-        softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
+        user = model.add_person('User', 'A user of my software system.')
+        softwareSystem = model.add_software_system('Software System', 'My software system.')
         user.uses(softwareSystem, 'Uses')
 
-        views = workspace.getViews
-        contextView = views.createSystemContextView(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
-        contextView.addAllSoftwareSystems
-        contextView.addAllPeople
+        views = workspace.get_views
+        contextView = views.create_system_context_view(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
+        contextView.add_all_software_systems
+        contextView.add_all_people
 
         ## add a theme
-        views.getConfiguration.setTheme('https://raw.githubusercontent.com/structurizr/java/master/structurizr-examples/src/com/structurizr/example/theme/theme.json')
+        views.get_configuration.set_theme('https://raw.githubusercontent.com/structurizr/java/master/structurizr-examples/src/com/structurizr/example/theme/theme.json')
       end
     end
   end

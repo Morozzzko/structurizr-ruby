@@ -11,25 +11,25 @@ module Structurizr
     class AutomaticDocumentationTemplateExample < Minitest::Test
       def test_definition
         workspace = Workspace.new('Documentation - Automatic', 'An empty software architecture document using the Structurizr template.')
-        model = workspace.getModel
-        views = workspace.getViews
+        model = workspace.get_model
+        views = workspace.get_views
 
-        user = model.addPerson('User', 'A user of my software system.')
-        softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
+        user = model.add_person('User', 'A user of my software system.')
+        softwareSystem = model.add_software_system('Software System', 'My software system.')
         user.uses(softwareSystem, 'Uses')
 
-        contextView = views.createSystemContextView(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
-        contextView.addAllSoftwareSystems
-        contextView.addAllPeople
+        contextView = views.create_system_context_view(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
+        contextView.add_all_software_systems
+        contextView.add_all_people
 
-        styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags::PERSON).shape(Shape::Person)
+        styles = views.get_configuration.get_styles
+        styles.add_element_style(Tags::PERSON).shape(Shape::Person)
 
         ## this directory includes a mix of Markdown and AsciiDoc files
-        documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/automatic'))
+        documentationRoot = java.io.file.new(File.join(__dir__, 'documentation/automatic'))
 
         template = AutomaticDocumentationTemplate.new(workspace.to_java)
-        template.addSections(softwareSystem, documentationRoot)
+        template.add_sections(softwareSystem, documentationRoot)
       end
     end
   end
