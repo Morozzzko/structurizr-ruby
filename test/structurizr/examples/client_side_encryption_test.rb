@@ -11,20 +11,20 @@ module Structurizr
     class ClientSideEncryption < Minitest::Test
       def test_definition
         workspace = Workspace.new('Client-side encrypted workspace', "This is a client-side encrypted workspace. The passphrase is 'password'.")
-        model = workspace.getModel
+        model = workspace.get_model
 
-        user = model.addPerson('User', 'A user of my software system.')
-        softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
+        user = model.add_person('User', 'A user of my software system.')
+        softwareSystem = model.add_software_system('Software System', 'My software system.')
         user.uses(softwareSystem, 'Uses')
 
-        views = workspace.getViews
-        contextView = views.createSystemContextView(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
-        contextView.addAllSoftwareSystems
-        contextView.addAllPeople
+        views = workspace.get_views
+        contextView = views.create_system_context_view(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
+        contextView.add_all_software_systems
+        contextView.add_all_people
 
-        styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags::SOFTWARE_SYSTEM).background('#d34407').color('#ffffff')
-        styles.addElementStyle(Tags::PERSON).background('#f86628').color('#ffffff').shape(Shape::Person)
+        styles = views.get_configuration.get_styles
+        styles.add_element_style(Tags::SOFTWARE_SYSTEM).background('#d34407').color('#ffffff')
+        styles.add_element_style(Tags::PERSON).background('#f86628').color('#ffffff').shape(Shape::Person)
       end
     end
   end

@@ -13,28 +13,28 @@ module Structurizr
 
       def test_definition
         workspace = Workspace.new('Filtered Views', 'An example of using filtered views.')
-        model = workspace.getModel
+        model = workspace.get_model
 
-        user = model.addPerson('User', 'A description of the user.')
-        softwareSystemA = model.addSoftwareSystem('Software System A', 'A description of software system A.')
-        softwareSystemB = model.addSoftwareSystem('Software System B', 'A description of software system B.')
-        softwareSystemB.addTags(FUTURE_STATE)
+        user = model.add_person('User', 'A description of the user.')
+        softwareSystemA = model.add_software_system('Software System A', 'A description of software system A.')
+        softwareSystemB = model.add_software_system('Software System B', 'A description of software system B.')
+        softwareSystemB.add_tags(FUTURE_STATE)
 
-        user.uses(softwareSystemA, 'Uses for tasks 1 and 2').addTags(CURRENT_STATE)
-        user.uses(softwareSystemA, 'Uses for task 1').addTags(FUTURE_STATE)
-        user.uses(softwareSystemB, 'Uses for task 2').addTags(FUTURE_STATE)
+        user.uses(softwareSystemA, 'Uses for tasks 1 and 2').add_tags(CURRENT_STATE)
+        user.uses(softwareSystemA, 'Uses for task 1').add_tags(FUTURE_STATE)
+        user.uses(softwareSystemB, 'Uses for task 2').add_tags(FUTURE_STATE)
 
-        views = workspace.getViews
-        systemLandscapeView = views.createSystemLandscapeView('SystemLandscape', 'An example System Landscape diagram.')
-        systemLandscapeView.addAllElements
+        views = workspace.get_views
+        systemLandscapeView = views.create_system_landscape_view('SystemLandscape', 'An example System Landscape diagram.')
+        systemLandscapeView.add_all_elements
 
-        views.createFilteredView(systemLandscapeView, 'CurrentState', 'The current system landscape.', FilterMode::Exclude, FUTURE_STATE)
-        views.createFilteredView(systemLandscapeView, 'FutureState', 'The future state system landscape after Software System B is live.', FilterMode::Exclude, CURRENT_STATE)
+        views.create_filtered_view(systemLandscapeView, 'CurrentState', 'The current system landscape.', FilterMode::Exclude, FUTURE_STATE)
+        views.create_filtered_view(systemLandscapeView, 'FutureState', 'The future state system landscape after Software System B is live.', FilterMode::Exclude, CURRENT_STATE)
 
-        styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags::ELEMENT).color('#ffffff')
-        styles.addElementStyle(Tags::SOFTWARE_SYSTEM).background('#91a437').shape(Shape::RoundedBox)
-        styles.addElementStyle(Tags::PERSON).background('#6a7b15').shape(Shape::Person)
+        styles = views.get_configuration.get_styles
+        styles.add_element_style(Tags::ELEMENT).color('#ffffff')
+        styles.add_element_style(Tags::SOFTWARE_SYSTEM).background('#91a437').shape(Shape::RoundedBox)
+        styles.add_element_style(Tags::PERSON).background('#6a7b15').shape(Shape::Person)
       end
     end
   end

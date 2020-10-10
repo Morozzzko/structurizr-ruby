@@ -13,47 +13,47 @@ module Structurizr
 
       def test_definition
         workspace = Workspace.new('Widgets Limited', 'Sells widgets to customers online.')
-        model = workspace.getModel
-        views = workspace.getViews
-        styles = views.getConfiguration.getStyles
+        model = workspace.get_model
+        views = workspace.get_views
+        styles = views.get_configuration.get_styles
 
-        model.setEnterprise(Enterprise.new('Widgets Limited').to_java)
+        model.set_enterprise(Enterprise.new('Widgets Limited').to_java)
 
-        customer = model.addPerson(Location::External, 'Customer', 'A customer of Widgets Limited.')
-        customerServiceUser = model.addPerson(Location::Internal, 'Customer Service Agent', 'Deals with customer enquiries.')
-        ecommerceSystem = model.addSoftwareSystem(Location::Internal, 'E-commerce System', 'Allows customers to buy widgets online via the widgets.com website.')
-        fulfilmentSystem = model.addSoftwareSystem(Location::Internal, 'Fulfilment System', 'Responsible for processing and shipping of customer orders.')
-        taxamo = model.addSoftwareSystem(Location::External, 'Taxamo', 'Calculates local tax (for EU B2B customers) and acts as a front-end for Braintree Payments.')
-        taxamo.setUrl('https://www.taxamo.com')
-        braintreePayments = model.addSoftwareSystem(Location::External, 'Braintree Payments', 'Processes credit card payments on behalf of Widgets Limited.')
-        braintreePayments.setUrl('https://www.braintreepayments.com')
-        jerseyPost = model.addSoftwareSystem(Location::External, 'Jersey Post', 'Calculates worldwide shipping costs for packages.')
+        customer = model.add_person(Location::External, 'Customer', 'A customer of Widgets Limited.')
+        customerServiceUser = model.add_person(Location::Internal, 'Customer Service Agent', 'Deals with customer enquiries.')
+        ecommerceSystem = model.add_software_system(Location::Internal, 'E-commerce System', 'Allows customers to buy widgets online via the widgets.com website.')
+        fulfilmentSystem = model.add_software_system(Location::Internal, 'Fulfilment System', 'Responsible for processing and shipping of customer orders.')
+        taxamo = model.add_software_system(Location::External, 'Taxamo', 'Calculates local tax (for EU B2B customers) and acts as a front-end for Braintree Payments.')
+        taxamo.set_url('https://www.taxamo.com')
+        braintreePayments = model.add_software_system(Location::External, 'Braintree Payments', 'Processes credit card payments on behalf of Widgets Limited.')
+        braintreePayments.set_url('https://www.braintreepayments.com')
+        jerseyPost = model.add_software_system(Location::External, 'Jersey Post', 'Calculates worldwide shipping costs for packages.')
 
         model.get_people.select do |relationship|
           relationship.get_location == Location::External
         end.each do |relationship|
-          relationship.addTags(EXTERNAL_TAG)
+          relationship.add_tags(EXTERNAL_TAG)
         end
 
         model.get_people.select do |relationship|
           relationship.get_location == Location::Internal
         end.each do |relationship|
-          relationship.addTags(INTERNAL_TAG)
+          relationship.add_tags(INTERNAL_TAG)
         end
 
         model.get_software_systems.select do |relationship|
           relationship.get_location == Location::External
         end.each do |relationship|
-          relationship.addTags(EXTERNAL_TAG)
+          relationship.add_tags(EXTERNAL_TAG)
         end
 
         model.get_software_systems.select do |relationship|
           relationship.get_location == Location::Internal
         end.each do |relationship|
-          relationship.addTags(INTERNAL_TAG)
+          relationship.add_tags(INTERNAL_TAG)
         end
 
-        customer.interactsWith(customerServiceUser, 'Asks questions to', 'Telephone')
+        customer.interacts_with(customerServiceUser, 'Asks questions to', 'Telephone')
         customerServiceUser.uses(ecommerceSystem, 'Looks up order information using')
         customer.uses(ecommerceSystem, 'Places orders for widgets using')
         ecommerceSystem.uses(fulfilmentSystem, 'Sends order information to')
@@ -61,31 +61,31 @@ module Structurizr
         ecommerceSystem.uses(taxamo, 'Delegates credit card processing to')
         taxamo.uses(braintreePayments, 'Uses for credit card processing')
 
-        systemLandscapeView = views.createSystemLandscapeView('SystemLandscape', 'The system landscape for Widgets Limited.')
-        systemLandscapeView.addAllElements
+        systemLandscapeView = views.create_system_landscape_view('SystemLandscape', 'The system landscape for Widgets Limited.')
+        systemLandscapeView.add_all_elements
 
-        ecommerceSystemContext = views.createSystemContextView(ecommerceSystem, 'EcommerceSystemContext', 'The system context diagram for the Widgets Limited e-commerce system.')
-        ecommerceSystemContext.addNearestNeighbours(ecommerceSystem)
-        ecommerceSystemContext.remove(customer.getEfferentRelationshipWith(customerServiceUser))
+        ecommerceSystemContext = views.create_system_context_view(ecommerceSystem, 'EcommerceSystemContext', 'The system context diagram for the Widgets Limited e-commerce system.')
+        ecommerceSystemContext.add_nearest_neighbours(ecommerceSystem)
+        ecommerceSystemContext.remove(customer.get_efferent_relationship_with(customerServiceUser))
 
-        fulfilmentSystemContext = views.createSystemContextView(fulfilmentSystem, 'FulfilmentSystemContext', 'The system context diagram for the Widgets Limited fulfilment system.')
-        fulfilmentSystemContext.addNearestNeighbours(fulfilmentSystem)
+        fulfilmentSystemContext = views.create_system_context_view(fulfilmentSystem, 'FulfilmentSystemContext', 'The system context diagram for the Widgets Limited fulfilment system.')
+        fulfilmentSystemContext.add_nearest_neighbours(fulfilmentSystem)
 
-        dynamicView = views.createDynamicView('CustomerSupportCall', 'A high-level overview of the customer support call process.')
+        dynamicView = views.create_dynamic_view('CustomerSupportCall', 'A high-level overview of the customer support call process.')
         dynamicView.add(customer, customerServiceUser)
         dynamicView.add(customerServiceUser, ecommerceSystem)
 
         template = StructurizrDocumentationTemplate.new(workspace.to_java)
-        template.addSection('System Landscape', Format::Markdown, 'Here is some information about the Widgets Limited system landscape... ![](embed:SystemLandscape)')
-        template.addContextSection(ecommerceSystem, Format::Markdown, 'This is the context section for the E-commerce System... ![](embed:EcommerceSystemContext)')
-        template.addContextSection(fulfilmentSystem, Format::Markdown, 'This is the context section for the Fulfilment System... ![](embed:FulfilmentSystemContext)')
+        template.add_section('System Landscape', Format::Markdown, 'Here is some information about the Widgets Limited system landscape... ![](embed:SystemLandscape)')
+        template.add_context_section(ecommerceSystem, Format::Markdown, 'This is the context section for the E-commerce System... ![](embed:EcommerceSystemContext)')
+        template.add_context_section(fulfilmentSystem, Format::Markdown, 'This is the context section for the Fulfilment System... ![](embed:FulfilmentSystemContext)')
 
-        styles.addElementStyle(Tags::SOFTWARE_SYSTEM).shape(Shape::RoundedBox)
-        styles.addElementStyle(Tags::PERSON).shape(Shape::Person)
+        styles.add_element_style(Tags::SOFTWARE_SYSTEM).shape(Shape::RoundedBox)
+        styles.add_element_style(Tags::PERSON).shape(Shape::Person)
 
-        styles.addElementStyle(Tags::ELEMENT).color('#ffffff')
-        styles.addElementStyle(EXTERNAL_TAG).background('#EC5381').border(Border::Dashed)
-        styles.addElementStyle(INTERNAL_TAG).background('#B60037')
+        styles.add_element_style(Tags::ELEMENT).color('#ffffff')
+        styles.add_element_style(EXTERNAL_TAG).background('#EC5381').border(Border::Dashed)
+        styles.add_element_style(INTERNAL_TAG).background('#B60037')
       end
     end
   end

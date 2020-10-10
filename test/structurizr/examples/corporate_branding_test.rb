@@ -18,25 +18,25 @@ module Structurizr
     class CorporateBranding < Minitest::Test
       def test_definition
         workspace = Workspace.new('Corporate Branding', 'This is a model of my software system.')
-        model = workspace.getModel
+        model = workspace.get_model
 
-        user = model.addPerson('User', 'A user of my software system.')
-        softwareSystem = model.addSoftwareSystem('Software System', 'My software system.')
+        user = model.add_person('User', 'A user of my software system.')
+        softwareSystem = model.add_software_system('Software System', 'My software system.')
         user.uses(softwareSystem, 'Uses')
 
-        views = workspace.getViews
-        contextView = views.createSystemContextView(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
-        contextView.addAllSoftwareSystems
-        contextView.addAllPeople
+        views = workspace.get_views
+        contextView = views.create_system_context_view(softwareSystem, 'SystemContext', 'An example of a System Context diagram.')
+        contextView.add_all_software_systems
+        contextView.add_all_people
 
-        styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags::PERSON).shape(Shape::Person)
+        styles = views.get_configuration.get_styles
+        styles.add_element_style(Tags::PERSON).shape(Shape::Person)
 
         template = StructurizrDocumentationTemplate.new(workspace.to_java)
-        template.addContextSection(softwareSystem, Format::Markdown, "Here is some context about the software system...\n\n![](embed:SystemContext)")
+        template.add_context_section(softwareSystem, Format::Markdown, "Here is some context about the software system...\n\n![](embed:SystemContext)")
 
-        branding = views.getConfiguration.getBranding
-        branding.setLogo(ImageUtils.getImageAsDataUri(java.io.File.new(File.join(__dir__, 'img/structurizr-logo.png'))))
+        branding = views.get_configuration.get_branding
+        branding.set_logo(ImageUtils.get_image_as_data_uri(java.io.File.new(File.join(__dir__, 'img/structurizr-logo.png'))))
       end
     end
   end
