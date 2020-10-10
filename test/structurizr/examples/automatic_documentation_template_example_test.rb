@@ -26,7 +26,7 @@ module Structurizr
         styles.add_element_style(Tags::PERSON).shape(Shape::Person)
 
         ## this directory includes a mix of Markdown and AsciiDoc files
-        documentationRoot = java.io.file.new(File.join(__dir__, 'documentation/automatic'))
+        documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/automatic'))
 
         template = AutomaticDocumentationTemplate.new(workspace.to_java)
         template.add_sections(softwareSystem, documentationRoot)

@@ -36,7 +36,7 @@ module Structurizr
         template.add_context_section(softwareSystem, Format::Markdown, "Here is some context about the software system...\n\n![](embed:SystemContext)")
 
         branding = views.get_configuration.get_branding
-        branding.set_logo(ImageUtils.get_image_as_data_uri(java.io.file.new(File.join(__dir__, 'img/structurizr-logo.png'))))
+        branding.set_logo(ImageUtils.get_image_as_data_uri(java.io.File.new(File.join(__dir__, 'img/structurizr-logo.png'))))
       end
     end
   end
