@@ -58,9 +58,9 @@ module Structurizr
         deploymentView.addAnimation(databaseInstance)
 
         styles = views.getConfiguration.getStyles
-        styles.addElementStyle(SPRING_BOOT_TAG).shape(Shape.RoundedBox).background('#ffffff')
-        styles.addElementStyle(DATABASE_TAG).shape(Shape.Cylinder).background('#ffffff')
-        styles.addElementStyle(Tags.INFRASTRUCTURE_NODE).shape(Shape.RoundedBox).background('#ffffff')
+        styles.addElementStyle(SPRING_BOOT_TAG).shape(Shape::RoundedBox).background('#ffffff')
+        styles.addElementStyle(DATABASE_TAG).shape(Shape::Cylinder).background('#ffffff')
+        styles.addElementStyle(Tags::INFRASTRUCTURE_NODE).shape(Shape::RoundedBox).background('#ffffff')
 
         views.getConfiguration.setThemes('https://raw.githubusercontent.com/structurizr/themes/master/amazon-web-services/theme.json')
       end

@@ -23,7 +23,7 @@ module Structurizr
         contextView.addAllPeople
 
         styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags.PERSON).shape(Shape.Person)
+        styles.addElementStyle(Tags::PERSON).shape(Shape::Person)
 
         ## this directory includes a mix of Markdown and AsciiDoc files
         documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/automatic'))

@@ -35,10 +35,10 @@ module Structurizr
 
         emailSystem = model.addSoftwareSystem('E-mail system', "The bank's Microsoft Exchange system.")
         financialRiskSystem.uses(emailSystem, 'Sends a notification that a report is ready to')
-        emailSystem.delivers(businessUser, 'Sends a notification that a report is ready to', 'E-mail message', InteractionStyle.Asynchronous)
+        emailSystem.delivers(businessUser, 'Sends a notification that a report is ready to', 'E-mail message', InteractionStyle::Asynchronous)
 
         centralMonitoringService = model.addSoftwareSystem('Central Monitoring Service', "The bank's central monitoring and alerting dashboard.")
-        financialRiskSystem.uses(centralMonitoringService, 'Sends critical failure alerts to', 'SNMP', InteractionStyle.Asynchronous).addTags(TAG_ALERT)
+        financialRiskSystem.uses(centralMonitoringService, 'Sends critical failure alerts to', 'SNMP', InteractionStyle::Asynchronous).addTags(TAG_ALERT)
 
         activeDirectory = model.addSoftwareSystem('Active Directory', "The bank's authentication and authorisation system.")
         financialRiskSystem.uses(activeDirectory, 'Uses for user authentication and authorisation')
@@ -51,17 +51,17 @@ module Structurizr
         styles = views.getConfiguration.getStyles
         financialRiskSystem.addTags('Risk System')
 
-        styles.addElementStyle(Tags.ELEMENT).color('#ffffff').fontSize(34)
+        styles.addElementStyle(Tags::ELEMENT).color('#ffffff').fontSize(34)
         styles.addElementStyle('Risk System').background('#550000').color('#ffffff')
-        styles.addElementStyle(Tags.SOFTWARE_SYSTEM).width(650).height(400).background('#801515').shape(Shape.RoundedBox)
-        styles.addElementStyle(Tags.PERSON).width(550).background('#d46a6a').shape(Shape.Person)
+        styles.addElementStyle(Tags::SOFTWARE_SYSTEM).width(650).height(400).background('#801515').shape(Shape::RoundedBox)
+        styles.addElementStyle(Tags::PERSON).width(550).background('#d46a6a').shape(Shape::Person)
 
-        styles.addRelationshipStyle(Tags.RELATIONSHIP).thickness(4).dashed(false).fontSize(32).width(400)
-        styles.addRelationshipStyle(Tags.SYNCHRONOUS).dashed(false)
-        styles.addRelationshipStyle(Tags.ASYNCHRONOUS).dashed(true)
+        styles.addRelationshipStyle(Tags::RELATIONSHIP).thickness(4).dashed(false).fontSize(32).width(400)
+        styles.addRelationshipStyle(Tags::SYNCHRONOUS).dashed(false)
+        styles.addRelationshipStyle(Tags::ASYNCHRONOUS).dashed(true)
         styles.addRelationshipStyle(TAG_ALERT).color('#ff0000')
 
-        styles.addElementStyle('Future State').opacity(30).border(Border.Dashed)
+        styles.addElementStyle('Future State').opacity(30).border(Border::Dashed)
         styles.addRelationshipStyle('Future State').opacity(30).dashed(true)
 
         template = StructurizrDocumentationTemplate.new(workspace.to_java)

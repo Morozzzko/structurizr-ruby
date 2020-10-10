@@ -40,14 +40,14 @@ module Structurizr
         messageBus.addTags(MESSAGE_BUS_TAG)
 
         customer.uses(customerApplication, 'Uses')
-        customerApplication.uses(customerService, 'Updates customer information using', 'JSON#HTTPS', InteractionStyle.Synchronous)
-        customerService.uses(messageBus, 'Sends customer update events to', '', InteractionStyle.Asynchronous)
-        customerService.uses(customerDatabase, 'Stores data in', 'JDBC', InteractionStyle.Synchronous)
-        customerService.uses(customerApplication, 'Sends events to', 'WebSocket', InteractionStyle.Asynchronous)
-        messageBus.uses(reportingService, 'Sends customer update events to', '', InteractionStyle.Asynchronous)
-        messageBus.uses(auditService, 'Sends customer update events to', '', InteractionStyle.Asynchronous)
-        reportingService.uses(reportingDatabase, 'Stores data in', '', InteractionStyle.Synchronous)
-        auditService.uses(auditStore, 'Stores events in', '', InteractionStyle.Synchronous)
+        customerApplication.uses(customerService, 'Updates customer information using', 'JSON#HTTPS', InteractionStyle::Synchronous)
+        customerService.uses(messageBus, 'Sends customer update events to', '', InteractionStyle::Asynchronous)
+        customerService.uses(customerDatabase, 'Stores data in', 'JDBC', InteractionStyle::Synchronous)
+        customerService.uses(customerApplication, 'Sends events to', 'WebSocket', InteractionStyle::Asynchronous)
+        messageBus.uses(reportingService, 'Sends customer update events to', '', InteractionStyle::Asynchronous)
+        messageBus.uses(auditService, 'Sends customer update events to', '', InteractionStyle::Asynchronous)
+        reportingService.uses(reportingDatabase, 'Stores data in', '', InteractionStyle::Synchronous)
+        auditService.uses(auditStore, 'Stores events in', '', InteractionStyle::Synchronous)
 
         views = workspace.getViews
 
@@ -76,16 +76,16 @@ module Structurizr
         dynamicView.endParallelSequence
 
         styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags.ELEMENT).color('#000000')
-        styles.addElementStyle(Tags.PERSON).background('#ffbf00').shape(Shape.Person)
-        styles.addElementStyle(Tags.CONTAINER).background('#facc2E')
-        styles.addElementStyle(MESSAGE_BUS_TAG).width(1600).shape(Shape.Pipe)
-        styles.addElementStyle(MICROSERVICE_TAG).shape(Shape.Hexagon)
-        styles.addElementStyle(DATASTORE_TAG).background('#f5da81').shape(Shape.Cylinder)
-        styles.addRelationshipStyle(Tags.RELATIONSHIP).routing(Routing.Orthogonal)
+        styles.addElementStyle(Tags::ELEMENT).color('#000000')
+        styles.addElementStyle(Tags::PERSON).background('#ffbf00').shape(Shape::Person)
+        styles.addElementStyle(Tags::CONTAINER).background('#facc2E')
+        styles.addElementStyle(MESSAGE_BUS_TAG).width(1600).shape(Shape::Pipe)
+        styles.addElementStyle(MICROSERVICE_TAG).shape(Shape::Hexagon)
+        styles.addElementStyle(DATASTORE_TAG).background('#f5da81').shape(Shape::Cylinder)
+        styles.addRelationshipStyle(Tags::RELATIONSHIP).routing(Routing::Orthogonal)
 
-        styles.addRelationshipStyle(Tags.ASYNCHRONOUS).dashed(true)
-        styles.addRelationshipStyle(Tags.SYNCHRONOUS).dashed(false)
+        styles.addRelationshipStyle(Tags::ASYNCHRONOUS).dashed(true)
+        styles.addRelationshipStyle(Tags::SYNCHRONOUS).dashed(false)
       end
     end
   end

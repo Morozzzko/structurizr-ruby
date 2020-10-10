@@ -23,8 +23,8 @@ module Structurizr
         contextView.addAllPeople
 
         styles = views.getConfiguration.getStyles
-        styles.addElementStyle(Tags.SOFTWARE_SYSTEM).background('#d34407').color('#ffffff')
-        styles.addElementStyle(Tags.PERSON).background('#f86628').color('#ffffff').shape(Shape.Person)
+        styles.addElementStyle(Tags::SOFTWARE_SYSTEM).background('#d34407').color('#ffffff')
+        styles.addElementStyle(Tags::PERSON).background('#f86628').color('#ffffff').shape(Shape::Person)
       end
     end
   end

@@ -19,36 +19,36 @@ module Structurizr
 
         model.setEnterprise(Enterprise.new('Widgets Limited').to_java)
 
-        customer = model.addPerson(Location.External, 'Customer', 'A customer of Widgets Limited.')
-        customerServiceUser = model.addPerson(Location.Internal, 'Customer Service Agent', 'Deals with customer enquiries.')
-        ecommerceSystem = model.addSoftwareSystem(Location.Internal, 'E-commerce System', 'Allows customers to buy widgets online via the widgets.com website.')
-        fulfilmentSystem = model.addSoftwareSystem(Location.Internal, 'Fulfilment System', 'Responsible for processing and shipping of customer orders.')
-        taxamo = model.addSoftwareSystem(Location.External, 'Taxamo', 'Calculates local tax (for EU B2B customers) and acts as a front-end for Braintree Payments.')
+        customer = model.addPerson(Location::External, 'Customer', 'A customer of Widgets Limited.')
+        customerServiceUser = model.addPerson(Location::Internal, 'Customer Service Agent', 'Deals with customer enquiries.')
+        ecommerceSystem = model.addSoftwareSystem(Location::Internal, 'E-commerce System', 'Allows customers to buy widgets online via the widgets.com website.')
+        fulfilmentSystem = model.addSoftwareSystem(Location::Internal, 'Fulfilment System', 'Responsible for processing and shipping of customer orders.')
+        taxamo = model.addSoftwareSystem(Location::External, 'Taxamo', 'Calculates local tax (for EU B2B customers) and acts as a front-end for Braintree Payments.')
         taxamo.setUrl('https://www.taxamo.com')
-        braintreePayments = model.addSoftwareSystem(Location.External, 'Braintree Payments', 'Processes credit card payments on behalf of Widgets Limited.')
+        braintreePayments = model.addSoftwareSystem(Location::External, 'Braintree Payments', 'Processes credit card payments on behalf of Widgets Limited.')
         braintreePayments.setUrl('https://www.braintreepayments.com')
-        jerseyPost = model.addSoftwareSystem(Location.External, 'Jersey Post', 'Calculates worldwide shipping costs for packages.')
+        jerseyPost = model.addSoftwareSystem(Location::External, 'Jersey Post', 'Calculates worldwide shipping costs for packages.')
 
         model.get_people.select do |relationship|
-          relationship.get_location == Location.External
+          relationship.get_location == Location::External
         end.each do |relationship|
           relationship.addTags(EXTERNAL_TAG)
         end
 
         model.get_people.select do |relationship|
-          relationship.get_location == Location.Internal
+          relationship.get_location == Location::Internal
         end.each do |relationship|
           relationship.addTags(INTERNAL_TAG)
         end
 
         model.get_software_systems.select do |relationship|
-          relationship.get_location == Location.External
+          relationship.get_location == Location::External
         end.each do |relationship|
           relationship.addTags(EXTERNAL_TAG)
         end
 
         model.get_software_systems.select do |relationship|
-          relationship.get_location == Location.Internal
+          relationship.get_location == Location::Internal
         end.each do |relationship|
           relationship.addTags(INTERNAL_TAG)
         end
@@ -76,15 +76,15 @@ module Structurizr
         dynamicView.add(customerServiceUser, ecommerceSystem)
 
         template = StructurizrDocumentationTemplate.new(workspace.to_java)
-        template.addSection('System Landscape', Format.Markdown, 'Here is some information about the Widgets Limited system landscape... ![](embed:SystemLandscape)')
-        template.addContextSection(ecommerceSystem, Format.Markdown, 'This is the context section for the E-commerce System... ![](embed:EcommerceSystemContext)')
-        template.addContextSection(fulfilmentSystem, Format.Markdown, 'This is the context section for the Fulfilment System... ![](embed:FulfilmentSystemContext)')
+        template.addSection('System Landscape', Format::Markdown, 'Here is some information about the Widgets Limited system landscape... ![](embed:SystemLandscape)')
+        template.addContextSection(ecommerceSystem, Format::Markdown, 'This is the context section for the E-commerce System... ![](embed:EcommerceSystemContext)')
+        template.addContextSection(fulfilmentSystem, Format::Markdown, 'This is the context section for the Fulfilment System... ![](embed:FulfilmentSystemContext)')
 
-        styles.addElementStyle(Tags.SOFTWARE_SYSTEM).shape(Shape.RoundedBox)
-        styles.addElementStyle(Tags.PERSON).shape(Shape.Person)
+        styles.addElementStyle(Tags::SOFTWARE_SYSTEM).shape(Shape::RoundedBox)
+        styles.addElementStyle(Tags::PERSON).shape(Shape::Person)
 
-        styles.addElementStyle(Tags.ELEMENT).color('#ffffff')
-        styles.addElementStyle(EXTERNAL_TAG).background('#EC5381').border(Border.Dashed)
+        styles.addElementStyle(Tags::ELEMENT).color('#ffffff')
+        styles.addElementStyle(EXTERNAL_TAG).background('#EC5381').border(Border::Dashed)
         styles.addElementStyle(INTERNAL_TAG).background('#B60037')
       end
     end
