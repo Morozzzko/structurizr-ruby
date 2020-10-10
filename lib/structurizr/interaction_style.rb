@@ -5,6 +5,5 @@ require 'structurizr/metal'
 
 module Structurizr
   class InteractionStyle < DelegateClass(Metal::Model::InteractionStyle)
-    extend Utils::JavaEnum[Metal::Model::InteractionStyle]
   end
 end

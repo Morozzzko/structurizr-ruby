@@ -5,6 +5,5 @@ require 'structurizr/metal'
 
 module Structurizr
   class FilterMode < DelegateClass(Metal::View::FilterMode)
-    extend Utils::JavaEnum[Metal::View::FilterMode]
   end
 end

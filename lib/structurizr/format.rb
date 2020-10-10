@@ -5,6 +5,5 @@ require 'structurizr/metal'
 
 module Structurizr
   class Format < DelegateClass(Metal::Documentation::Format)
-    extend Utils::JavaEnum[Metal::Documentation::Format]
   end
 end
