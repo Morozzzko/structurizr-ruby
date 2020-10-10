@@ -4,6 +4,5 @@ require 'structurizr/utils'
 require 'structurizr/metal'
 
 module Structurizr
-  class Tags < DelegateClass(Metal::Model::Tags)
-  end
+  Tags = Metal::Model::Tags
 end

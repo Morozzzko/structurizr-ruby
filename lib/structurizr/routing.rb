@@ -4,6 +4,5 @@ require 'structurizr/utils'
 require 'structurizr/metal'
 
 module Structurizr
-  class Routing < DelegateClass(Metal::View::Routing)
-  end
+  Routing = Metal::View::Routing
 end
