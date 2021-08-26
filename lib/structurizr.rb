@@ -2,6 +2,11 @@
 
 require 'structurizr/version'
 require 'structurizr/workspace'
+require 'structurizr/container'
+require 'structurizr/component'
+require 'structurizr/relationship'
+require 'structurizr/software_system'
+require 'structurizr/person'
 
 require 'structurizr/enums'
 require 'structurizr/documentation_templates'

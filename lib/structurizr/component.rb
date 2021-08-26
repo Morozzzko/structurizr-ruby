@@ -3,11 +3,11 @@
 require 'structurizr/metal'
 
 module Structurizr
-  Model = Metal::Model::Model
+  Component = Metal::Model::Component
 
-  class Model
+  class Component
     def inspect
-      %{<Model: "#{name}">}
+      %{<Component: "#{name}">}
     end
   end
 end

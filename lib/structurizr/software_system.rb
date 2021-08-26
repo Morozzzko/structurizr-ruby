@@ -3,11 +3,11 @@
 require 'structurizr/metal'
 
 module Structurizr
-  Model = Metal::Model::Model
+  SoftwareSystem = Metal::Model::SoftwareSystem
 
-  class Model
+  class SoftwareSystem
     def inspect
-      %{<Model: "#{name}">}
+      %{<SoftwareSystem: "#{name}">}
     end
   end
 end
