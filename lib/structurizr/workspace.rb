@@ -6,18 +6,15 @@ require 'structurizr/model'
 require 'structurizr/enterprise'
 
 module Structurizr
-  class Workspace < DelegateClass(Metal::Root::Workspace)
-    attr_reader :workspace
-    def initialize(name, description)
-      @workspace = Metal::Root::Workspace.new(name, description)
+  Workspace = Metal::Root::Workspace
 
-      super(@workspace)
+  class Workspace
+    def to_json(*_args)
+      Metal::Util::WorkspaceUtils.to_json(self, true)
     end
 
-    alias to_java workspace
-
-    def to_json(*_args)
-      Metal::Util::WorkspaceUtils.to_json(to_java, true)
+    def self.from_json(json)
+      Metal::Util::WorkspaceUtils.from_json(json)
     end
   end
 end

@@ -4,7 +4,5 @@ require 'structurizr/metal'
 require 'structurizr/utils'
 
 module Structurizr
-  class Model < DelegateClass(Metal::Model::Model)
-    include Utils::DynamicAttributes
-  end
+  Model = Metal::Model::Model
 end
