@@ -9,5 +9,9 @@ module Structurizr
     def inspect
       %{<Model: "#{name}">}
     end
+
+    def elements
+      get_elements.to_a
+    end
   end
 end
