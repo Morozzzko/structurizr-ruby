@@ -2,12 +2,16 @@
 
 require 'java'
 
-require 'structurizr/metal/jars/commons-logging-1.2.jar'
-require 'structurizr/metal/jars/jackson-core-2.11.2.jar'
-require 'structurizr/metal/jars/jackson-databind-2.11.2.jar'
-require 'structurizr/metal/jars/jackson-annotations-2.11.2.jar'
-require 'structurizr/metal/jars/structurizr-core-1.6.0.jar'
-require 'structurizr/metal/jars/structurizr-client-1.6.0.jar'
+Dir[File.join(__dir__, 'metal/jars/*.jar')].each do |jar_path|
+  require jar_path
+end
+
+# require 'structurizr/metal/jars/commons-logging-1.2.jar'
+# require 'structurizr/metal/jars/jackson-core-2.11.2.jar'
+# require 'structurizr/metal/jars/jackson-databind-2.11.2.jar'
+# require 'structurizr/metal/jars/jackson-annotations-2.11.2.jar'
+# require 'structurizr/metal/jars/structurizr-core-1.6.0.jar'
+# require 'structurizr/metal/jars/structurizr-client-1.6.0.jar'
 
 module Structurizr
   # This namespace provides lower-level Java integration with Structurizr
