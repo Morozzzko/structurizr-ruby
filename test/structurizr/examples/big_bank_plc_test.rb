@@ -24,7 +24,7 @@ module Structurizr
         model.set_implied_relationships_strategy(Metal::Model::CreateImpliedRelationshipsUnlessAnyRelationshipExistsStrategy.new)
         views = workspace.get_views
 
-        model.set_enterprise(Enterprise.new('Big Bank plc').to_java)
+        model.set_enterprise(Enterprise.new('Big Bank plc'))
 
         ## people and software systems
         customer = model.add_person(Location::External, 'Personal Banking Customer', 'A customer of the bank, with personal bank accounts.')
@@ -253,7 +253,7 @@ module Structurizr
 
         ## documentation
         ## - usually the documentation would be included from separate Markdown#AsciiDoc files, but this is just an example
-        template = StructurizrDocumentationTemplate.new(workspace.to_java)
+        template = StructurizrDocumentationTemplate.new(workspace)
         template.add_context_section(internetBankingSystem, Format::Markdown,
                                    "Here is some context about the Internet Banking System...\n" \
                                            "![](embed:SystemLandscape)\n" \

@@ -32,7 +32,7 @@ module Structurizr
         styles = views.get_configuration.get_styles
         styles.add_element_style(Tags::PERSON).shape(Shape::Person)
 
-        template = StructurizrDocumentationTemplate.new(workspace.to_java)
+        template = StructurizrDocumentationTemplate.new(workspace)
         template.add_context_section(softwareSystem, Format::Markdown, "Here is some context about the software system...\n\n![](embed:SystemContext)")
 
         branding = views.get_configuration.get_branding
