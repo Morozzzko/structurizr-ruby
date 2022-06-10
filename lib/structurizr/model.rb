@@ -6,10 +6,6 @@ module Structurizr
   Model = Metal::Model::Model
 
   class Model
-    def inspect
-      %(<Model: "#{name}">)
-    end
-
     def elements
       get_elements.to_a
     end
