@@ -7,7 +7,7 @@ module Structurizr
 
   class Model
     def inspect
-      %{<Model: "#{name}">}
+      %(<Model: "#{name}">)
     end
 
     def elements

@@ -3,14 +3,9 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b75e8c130fc8b3bf54b5/test_coverage)](https://codeclimate.com/github/Morozzzko/structurizr-ruby/test_coverage)[![Maintainability](https://api.codeclimate.com/v1/badges/b75e8c130fc8b3bf54b5/maintainability)](https://codeclimate.com/github/Morozzzko/structurizr-ruby/maintainability)
 
 
-`structurizr-ruby` brings the [C4 model](https://c4model.com) to Ruby. It piggybacks on top of [Java's API](https://github.com/structurizr/java) for [Structurizr](https://structurizr.com), which is (so far) the most powerful tool for incorporating C4 model into your software architecture process. It also serves as an architecture hub, so the ultimate goal of this gem is to let you interface your models described with [Structurizr DSL](https://github.com/structurizr/dsl).
+`structurizr-ruby` brings the [C4 model](https://c4model.com) to Ruby. It piggybacks on top of [Java's API](https://github.com/structurizr/java) for [Structurizr](https://structurizr.com), which is a powerful tool for incorporating C4 model into your software architecture process. 
 
-The primary goal is to give nicer interface to basic abstractions:
-
-* Software systems
-* Containers
-* Components
-* Tags
+The primary goal is to enable better introspection & scripting for workspaces defined by Structurizr DSL.
 
 As a bonus, this library provides a complete integration to build Structurizr workspace from Ruby. However, it doesn't make much sense since there's Structurizr DSL.
 
@@ -41,8 +36,6 @@ Before you start, you need to `require` the necessary files:
 ```ruby
 require 'structurizr'
 ```
-
-Now you can go ahead and use `Structurizr::Workspace` to create your workspace. See [examples](/test/structurizr/examples/) with complete definitions.
 
 ## Development
 

@@ -7,7 +7,7 @@ module Structurizr
 
   class Container
     def inspect
-      %{<Container: "#{name}">}
+      %(<Container: "#{name}">)
     end
   end
 end

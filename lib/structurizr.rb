@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'structurizr/version'
+require 'structurizr/model_item'
 require 'structurizr/workspace'
 require 'structurizr/container'
 require 'structurizr/component'

@@ -7,7 +7,7 @@ module Structurizr
 
   class Component
     def inspect
-      %{<Component: "#{name}">}
+      %(<Component: "#{name}">)
     end
   end
 end

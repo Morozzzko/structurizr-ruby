@@ -7,7 +7,7 @@ module Structurizr
 
   class Relationship
     def inspect
-      %{<Relationship: #{source.name} -> #{destination.name}>}
+      %(<Relationship: #{source.name} -> #{destination.name}>)
     end
   end
 end

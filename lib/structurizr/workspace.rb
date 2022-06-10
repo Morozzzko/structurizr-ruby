@@ -17,7 +17,7 @@ module Structurizr
     end
 
     def inspect
-      %{<Workspace: "#{name}">}
+      %(<Workspace: "#{name}">)
     end
   end
 end

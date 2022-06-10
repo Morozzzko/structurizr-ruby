@@ -7,7 +7,7 @@ module Structurizr
 
   class SoftwareSystem
     def inspect
-      %{<SoftwareSystem: "#{name}">}
+      %(<SoftwareSystem: "#{name}">)
     end
   end
 end

@@ -7,7 +7,7 @@ module Structurizr
 
   class Person
     def inspect
-      %{<Person: "#{name}">}
+      %(<Person: "#{name}">)
     end
   end
 end
