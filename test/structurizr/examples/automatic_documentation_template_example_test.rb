@@ -28,7 +28,7 @@ module Structurizr
         ## this directory includes a mix of Markdown and AsciiDoc files
         documentationRoot = java.io.File.new(File.join(__dir__, 'documentation/automatic'))
 
-        template = AutomaticDocumentationTemplate.new(workspace.to_java)
+        template = AutomaticDocumentationTemplate.new(workspace)
         template.add_sections(softwareSystem, documentationRoot)
       end
     end

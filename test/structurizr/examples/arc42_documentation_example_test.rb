@@ -26,7 +26,7 @@ module Structurizr
         styles = views.get_configuration.get_styles
         styles.add_element_style(Tags::PERSON).shape(Shape::Person)
 
-        @template = Arc42DocumentationTemplate.new(workspace.to_java)
+        @template = Arc42DocumentationTemplate.new(workspace)
       end
 
       def test_markdown

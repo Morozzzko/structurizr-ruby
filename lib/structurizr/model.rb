@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 require 'structurizr/metal'
-require 'structurizr/utils'
 
 module Structurizr
-  class Model < DelegateClass(Metal::Model::Model)
-    include Utils::DynamicAttributes
+  Model = Metal::Model::Model
+
+  class Model
+    def elements
+      get_elements.to_a
+    end
   end
 end

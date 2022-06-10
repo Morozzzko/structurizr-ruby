@@ -24,7 +24,7 @@ module Structurizr
         model.set_implied_relationships_strategy(Metal::Model::CreateImpliedRelationshipsUnlessAnyRelationshipExistsStrategy.new)
         views = workspace.get_views
 
-        model.set_enterprise(Enterprise.new('Big Bank plc').to_java)
+        model.set_enterprise(Enterprise.new('Big Bank plc'))
 
         ## people and software systems
         customer = model.add_person(Location::External, 'Personal Banking Customer', 'A customer of the bank, with personal bank accounts.')
@@ -253,30 +253,30 @@ module Structurizr
 
         ## documentation
         ## - usually the documentation would be included from separate Markdown#AsciiDoc files, but this is just an example
-        template = StructurizrDocumentationTemplate.new(workspace.to_java)
+        template = StructurizrDocumentationTemplate.new(workspace)
         template.add_context_section(internetBankingSystem, Format::Markdown,
-                                   "Here is some context about the Internet Banking System...\n" \
-                                           "![](embed:SystemLandscape)\n" \
-                                           "![](embed:SystemContext)\n" \
-                                           "### Internet Banking System\n...\n" \
-                                           "### Mainframe Banking System\n...\n")
+                                     "Here is some context about the Internet Banking System...\n" \
+                                             "![](embed:SystemLandscape)\n" \
+                                             "![](embed:SystemContext)\n" \
+                                             "### Internet Banking System\n...\n" \
+                                             "### Mainframe Banking System\n...\n")
         template.add_containers_section(internetBankingSystem, Format::Markdown,
-                                      "Here is some information about the containers within the Internet Banking System...\n" \
-                                              "![](embed:Containers)\n" \
-                                              "### Web Application\n...\n" \
-                                              "### Database\n...\n")
+                                        "Here is some information about the containers within the Internet Banking System...\n" \
+                                                "![](embed:Containers)\n" \
+                                                "### Web Application\n...\n" \
+                                                "### Database\n...\n")
         template.add_components_section(webApplication, Format::Markdown,
-                                      "Here is some information about the API Application...\n" \
-                                              "![](embed:Components)\n" \
-                                              "### Sign in process\n" \
-                                              "Here is some information about the Sign In Controller, including how the sign in process works...\n" \
-                                              '![](embed:SignIn)')
+                                        "Here is some information about the API Application...\n" \
+                                                "![](embed:Components)\n" \
+                                                "### Sign in process\n" \
+                                                "Here is some information about the Sign In Controller, including how the sign in process works...\n" \
+                                                '![](embed:SignIn)')
         template.add_development_environment_section(internetBankingSystem, Format::AsciiDoc,
-                                                  "Here is some information about how to set up a development environment for the Internet Banking System...\n" \
-                                                          'image::embed:DevelopmentDeployment[]')
+                                                     "Here is some information about how to set up a development environment for the Internet Banking System...\n" \
+                                                             'image::embed:DevelopmentDeployment[]')
         template.add_deployment_section(internetBankingSystem, Format::AsciiDoc,
-                                      "Here is some information about the live deployment environment for the Internet Banking System...\n" \
-                                              'image::embed:LiveDeployment[]')
+                                        "Here is some information about the live deployment environment for the Internet Banking System...\n" \
+                                                'image::embed:LiveDeployment[]')
       end
     end
   end

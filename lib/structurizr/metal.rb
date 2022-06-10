@@ -2,7 +2,7 @@
 
 require 'java'
 
-Dir[File.join(__dir__, 'metal/jars/*.jar')].each do |jar_path|
+Dir[File.join(__dir__, 'metal/jars/*.jar')].sort.each do |jar_path|
   require jar_path
 end
 

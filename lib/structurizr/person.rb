@@ -3,5 +3,5 @@
 require 'structurizr/metal'
 
 module Structurizr
-  Tags = Metal::Model::Tags
+  Person = Metal::Model::Person
 end

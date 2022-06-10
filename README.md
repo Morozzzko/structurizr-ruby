@@ -3,21 +3,13 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b75e8c130fc8b3bf54b5/test_coverage)](https://codeclimate.com/github/Morozzzko/structurizr-ruby/test_coverage)[![Maintainability](https://api.codeclimate.com/v1/badges/b75e8c130fc8b3bf54b5/maintainability)](https://codeclimate.com/github/Morozzzko/structurizr-ruby/maintainability)
 
 
-`structurizr-ruby` brings the [C4 model](https://c4model.com) to Ruby. It piggybacks on top of [Java's API](https://github.com/structurizr/java) for [Structurizr](https://structurizr.com), which is (so far) the most powerful tool for incorporating C4 model into your software architecture process. It also serves as an architecture hub, so the ultimate goal of this gem is to _bootstrap_ your C4 model and help you _maintain_ it using plain Ruby code.
+`structurizr-ruby` brings the [C4 model](https://c4model.com) to Ruby. It piggybacks on top of [Java's API](https://github.com/structurizr/java) for [Structurizr](https://structurizr.com), which is a powerful tool for incorporating C4 model into your software architecture process. 
 
-Here are the things you should be able to do with this gem as we progress:
+The primary goal is to enable better introspection & scripting for workspaces defined by Structurizr DSL.
 
-* Create a C4 model of your architecture using Ruby
-* Publish it to your Structurizr workspace
-* Test your diagrams
-* Create plain and simple diagrams
-* Customize its rendering
-* Manage [architecture decision records](https://github.com/joelparkerhenderson/architecture_decision_record)
-* Manage documentation
+As a bonus, this library provides a complete integration to build Structurizr workspace from Ruby. However, it doesn't make much sense since there's Structurizr DSL.
 
-This library provides wrappers around Java's library, so it's essentially feature complete since the first public release. However, the goal is to provide idiomatic Ruby experience. We achieve it by building our own wrappers and DSL. 
-
-If you've met a feature which is not implemented via Ruby DSL, you can always use [`Structurizr::Metal`](/lib/structurizr/metal.rb) to access Java classes and methods. Please don't forget to [submit issue or a pull-request](#Contributing) which describes your use-case and the missing features.
+If you've met something which doesn't have a nice Ruby DSL, you can always use [`Structurizr::Metal`](/lib/structurizr/metal.rb) to access Java classes and methods. Please don't forget to [submit issue or a pull-request](#Contributing) which describes your use-case and the missing features.
 
 ## Installation
 
@@ -27,7 +19,7 @@ Install the gem:
 
 or add it to your Gemfile via CLI:
 
-    $ bundle add structurizr
+    $ jruby -S bundle add structurizr
 
 or just edit your `Gemfile` manually:
 
@@ -44,8 +36,6 @@ Before you start, you need to `require` the necessary files:
 ```ruby
 require 'structurizr'
 ```
-
-Now you can go ahead and use `Structurizr::Workspace` to create your workspace. See [examples](/test/structurizr/examples/) with complete definitions.
 
 ## Development
 
