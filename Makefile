@@ -1,15 +1,4 @@
-.PHONY: download-jars test console
-
-
-download-jars:
-	rm -f lib/structurizr/metal/jars/*.jar
-	mvn dependency:get -Dartifact=commons-logging:commons-logging:LATEST -Ddest=./lib/structurizr/metal/jars/
-	mvn dependency:get -Dartifact=com.fasterxml.jackson.core:jackson-core:LATEST -Ddest=./lib/structurizr/metal/jars/
-	mvn dependency:get -Dartifact=com.fasterxml.jackson.core:jackson-databind:LATEST -Ddest=./lib/structurizr/metal/jars/
-	mvn dependency:get -Dartifact=com.fasterxml.jackson.core:jackson-annotations:LATEST -Ddest=./lib/structurizr/metal/jars/
-	mvn dependency:get -Dartifact=com.structurizr:structurizr-core:LATEST -Ddest=./lib/structurizr/metal/jars/
-	mvn dependency:get -Dartifact=com.structurizr:structurizr-graphviz:LATEST -Ddest=./lib/structurizr/metal/jars/
-	mvn dependency:get -Dartifact=com.structurizr:structurizr-client:LATEST -Ddest=./lib/structurizr/metal/jars/
+.PHONY: test setup bundle lint console download-jars
 
 test:
 	jruby -Itest -Ilib bin/test
@@ -26,3 +15,13 @@ lint:
 
 console:
 	bin/console
+
+download-jars:
+	rm -f lib/structurizr/metal/jars/*.jar
+	mvn dependency:get -Dartifact=commons-logging:commons-logging:LATEST -Ddest=./lib/structurizr/metal/jars/
+	mvn dependency:get -Dartifact=com.fasterxml.jackson.core:jackson-core:LATEST -Ddest=./lib/structurizr/metal/jars/
+	mvn dependency:get -Dartifact=com.fasterxml.jackson.core:jackson-databind:LATEST -Ddest=./lib/structurizr/metal/jars/
+	mvn dependency:get -Dartifact=com.fasterxml.jackson.core:jackson-annotations:LATEST -Ddest=./lib/structurizr/metal/jars/
+	mvn dependency:get -Dartifact=com.structurizr:structurizr-core:LATEST -Ddest=./lib/structurizr/metal/jars/
+	mvn dependency:get -Dartifact=com.structurizr:structurizr-graphviz:LATEST -Ddest=./lib/structurizr/metal/jars/
+	mvn dependency:get -Dartifact=com.structurizr:structurizr-client:LATEST -Ddest=./lib/structurizr/metal/jars/
