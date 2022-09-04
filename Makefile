@@ -1,11 +1,16 @@
-.PHONY: test setup bundle lint console download-jars build
+.PHONY: test transpile install setup bundle lint console download-jars build-gem build
 
 test:
 	jruby -Itest -Ilib bin/test
 
-setup:
+transpile:
+	ruby-next nextify ./lib
+
+install:
 	jruby -S gem install bundler
 	jruby -S bundle install
+
+setup: install transpile
 
 bundle:
 	jruby -S bundle
@@ -26,6 +31,7 @@ download-jars:
 	mvn dependency:get -Dartifact=com.structurizr:structurizr-graphviz:LATEST -Ddest=./lib/structurizr/metal/jars/
 	mvn dependency:get -Dartifact=com.structurizr:structurizr-client:LATEST -Ddest=./lib/structurizr/metal/jars/
 
-build:
-	ruby-next nextify ./lib
+build-gem:
 	gem build
+
+build: transpile build-gem
