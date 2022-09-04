@@ -1,4 +1,4 @@
-.PHONY: test setup bundle lint console download-jars
+.PHONY: test setup bundle lint console download-jars build
 
 test:
 	jruby -Itest -Ilib bin/test
@@ -25,3 +25,7 @@ download-jars:
 	mvn dependency:get -Dartifact=com.structurizr:structurizr-core:LATEST -Ddest=./lib/structurizr/metal/jars/
 	mvn dependency:get -Dartifact=com.structurizr:structurizr-graphviz:LATEST -Ddest=./lib/structurizr/metal/jars/
 	mvn dependency:get -Dartifact=com.structurizr:structurizr-client:LATEST -Ddest=./lib/structurizr/metal/jars/
+
+build:
+	ruby-next nextify ./lib
+	gem build

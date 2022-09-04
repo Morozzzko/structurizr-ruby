@@ -3,6 +3,7 @@
 
 require 'structurizr'
 require 'structurizr/repl'
+require 'ruby-next/pry'
 
 application = Structurizr::REPL::Application.new(ARGV)
 
