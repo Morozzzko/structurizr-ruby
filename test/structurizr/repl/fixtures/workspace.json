@@ -1,0 +1,118 @@
+{
+    "name": "Name",
+    "description": "Description",
+    "revision": 2,
+    "lastModifiedDate": "2022-09-04T01:47:15Z",
+    "lastModifiedUser": "igor@morozov.is",
+    "lastModifiedAgent": "structurizr-web/2796/dsl",
+    "properties": {
+        "structurizr.dsl": "d29ya3NwYWNlICJOYW1lIiAiRGVzY3JpcHRpb24iIHsKCiAgICBtb2RlbCB7CiAgICAgICAgdXNlciA9IHBlcnNvbiAiVXNlciIgIkEgdXNlciBvZiBteSBzb2Z0d2FyZSBzeXN0ZW0uIgogICAgICAgIHNvZnR3YXJlU3lzdGVtID0gc29mdHdhcmVTeXN0ZW0gIlNvZnR3YXJlIFN5c3RlbSIgIk15IHNvZnR3YXJlIHN5c3RlbS4iCgogICAgICAgIHVzZXIgLT4gc29mdHdhcmVTeXN0ZW0gIlVzZXMiCiAgICB9CgogICAgdmlld3MgewogICAgICAgIHN5c3RlbUNvbnRleHQgc29mdHdhcmVTeXN0ZW0gIlN5c3RlbUNvbnRleHQiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQKICAgICAgICB9CgogICAgICAgIHN0eWxlcyB7CiAgICAgICAgICAgIGVsZW1lbnQgIlNvZnR3YXJlIFN5c3RlbSIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjMTE2OGJkCiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiUGVyc29uIiB7CiAgICAgICAgICAgICAgICBzaGFwZSBwZXJzb24KICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzA4NDI3YgogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICB9CiAgICAgICAgfQogICAgfQogICAgCn0K"
+    },
+    "model": {
+        "people": [
+            {
+                "id": "1",
+                "tags": "Element,Person",
+                "name": "User",
+                "description": "A user of my software system.",
+                "relationships": [
+                    {
+                        "id": "3",
+                        "tags": "Relationship",
+                        "sourceId": "1",
+                        "destinationId": "2",
+                        "description": "Uses"
+                    }
+                ],
+                "location": "Unspecified"
+            }
+        ],
+        "softwareSystems": [
+            {
+                "id": "2",
+                "tags": "Element,Software System",
+                "name": "Software System",
+                "description": "My software system.",
+                "location": "Unspecified",
+                "documentation": {}
+            }
+        ],
+        "customElements": [],
+        "deploymentNodes": []
+    },
+    "documentation": {
+        "sections": [],
+        "decisions": [],
+        "images": []
+    },
+    "views": {
+        "systemContextViews": [
+            {
+                "softwareSystemId": "2",
+                "key": "SystemContext",
+                "order": 1,
+                "paperSize": "A6_Portrait",
+                "dimensions": {
+                    "width": 866,
+                    "height": 1416
+                },
+                "automaticLayout": {
+                    "implementation": "Graphviz",
+                    "rankDirection": "TopBottom",
+                    "rankSeparation": 300,
+                    "nodeSeparation": 300,
+                    "edgeSeparation": 0,
+                    "vertices": false
+                },
+                "enterpriseBoundaryVisible": true,
+                "elements": [
+                    {
+                        "id": "1",
+                        "x": 232,
+                        "y": 207
+                    },
+                    {
+                        "id": "2",
+                        "x": 207,
+                        "y": 907
+                    }
+                ],
+                "relationships": [
+                    {
+                        "id": "3"
+                    }
+                ],
+                "animations": []
+            }
+        ],
+        "configuration": {
+            "branding": {},
+            "styles": {
+                "elements": [
+                    {
+                        "tag": "Software System",
+                        "background": "#1168bd",
+                        "color": "#ffffff"
+                    },
+                    {
+                        "tag": "Person",
+                        "background": "#08427b",
+                        "color": "#ffffff",
+                        "shape": "Person"
+                    }
+                ],
+                "relationships": []
+            },
+            "terminology": {},
+            "lastSavedView": "SystemContext",
+            "themes": []
+        },
+        "customViews": [],
+        "systemLandscapeViews": [],
+        "containerViews": [],
+        "componentViews": [],
+        "dynamicViews": [],
+        "deploymentViews": [],
+        "filteredViews": []
+    }
+}

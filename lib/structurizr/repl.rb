@@ -16,6 +16,8 @@ module Structurizr
       end
     end
 
+    InvalidWorkspaceFileError = Class.new(StandardError)
+
     class Context
       extend Delegation
 
@@ -24,13 +26,13 @@ module Structurizr
       delegate :model, to: :workspace
       delegate :relationships, :elements, :software_systems, :people, to: :model
 
-      def initialize(workspace_path)
-        @workspace = Structurizr::Workspace.from_json(File.read(workspace_path))
+      def initialize(workspace)
+        @workspace = workspace
       end
     end
 
     class Application
-      attr_reader :context, :workspace_path
+      attr_reader :context, :workspace_path, :argv
 
       def initialize(argv)
         @argv = argv
@@ -43,12 +45,16 @@ module Structurizr
           else
             puts 'Usage: structurizr-repl <path/to/structurizr.json>'
 
-            exit 2
+            raise InvalidWorkspaceFileError, 'Please specify a valid path'
           end
       end
 
       def prepare_context!
-        @context = Structurizr::REPL::Context.new(workspace_path)
+        @context = Structurizr::REPL::Context.new(
+          Structurizr::Workspace.from_json(
+            File.read(workspace_path)
+          )
+        )
       end
 
       def setup_pry!
