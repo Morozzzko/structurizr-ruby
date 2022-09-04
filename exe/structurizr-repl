@@ -1,0 +1,68 @@
+#!/usr/bin/env jruby
+# frozen_string_literal: true
+
+require 'bundler/inline'
+gemfile do
+  source 'https://rubygems.org'
+
+  gem 'pry'
+  gem 'structurizr', path: '/Users/moroz/projects/mine/structurizr' # git: 'git@github.com:Morozzzko/structurizr-ruby.git'
+end
+
+require 'structurizr'
+require 'structurizr/repl'
+
+class Structurizr::REPL::Application
+  attr_reader :context, :workspace_path
+
+  def parse_workspace_path!(argv)
+    @workspace_path = if (input_path = ARGV.first) && File.file?(input_path)
+      ARGV.first
+    else
+      puts "Usage: structurizr-repl <path/to/structurizr.json>"
+
+      exit 2
+    end
+  end
+
+  def prepare_context!
+    @context = Structurizr::REPL::Context.new(workspace_path)
+  end
+
+  def setup_pry!
+    setup_welcome_message
+    register_commands
+  end
+
+  def start
+    Pry.start(context)
+  end
+
+  private
+
+  def register_commands
+    Pry::Commands.add_command Structurizr::REPL::Commands::Workspace
+    Pry::Commands.add_command Structurizr::REPL::Commands::Model
+    Pry::Commands.import Structurizr::REPL::Commands::Shortcuts::All
+  end
+
+  def setup_welcome_message
+    Pry.hooks.add_hook(
+      :before_session,
+      :structurizr_welcome_message
+    ) do |output, binding, pry|
+      output.puts <<~ECHO
+        Welcome to Structurizr REPL
+
+        Type `help structurizr` to get a list of commands
+      ECHO
+    end
+  end
+
+end
+
+application = Structurizr::REPL::Application.new
+application.parse_workspace_path!(ARGV)
+application.prepare_context!
+application.setup_pry!
+application.start
