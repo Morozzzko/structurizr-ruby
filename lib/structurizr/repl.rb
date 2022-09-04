@@ -1,58 +1,11 @@
 # frozen_string_literal: true
 
 require 'pry'
+require 'structurizr/repl/commands'
 
 module Structurizr
   module REPL
-    module Commands
-      class Workspace < Pry::ClassCommand
-        match "workspace"
-        description "Access current workspace"
-        group "Structurizr"
-        command_options keep_retval: true
-
-        def process
-          target_self.workspace
-        end
-      end
-
-      class Model < Pry::ClassCommand
-        match "model"
-        description "Access current workspace's model"
-        group "Structurizr"
-        command_options keep_retval: true
-
-        def process
-          target_self.workspace.model
-        end
-      end
-
-      module Shortcuts
-        All = Pry::CommandSet.new
-
-        {
-          'Relationships' => 'relationships',
-          'Elements' => 'elements',
-          'People' => 'people'
-        }.each do |class_name, attribute_name|
-          shortcut_class = Class.new(Pry::ClassCommand) do
-            match attribute_name
-            description "Access model's #{attribute_name}"
-            group "Structurizr"
-            command_options keep_retval: true
-
-            define_method :process do
-              target_self.workspace.model.public_send(attribute_name.to_sym)
-            end
-          end
-
-          const_set(class_name, shortcut_class)
-
-          All.add_command shortcut_class
-        end
-      end
-    end
-
+    # Simple module which defines a reader for a nested attribute
     module Delegation
       def delegate(*methods, to:)
         methods.each do |method|
@@ -73,6 +26,59 @@ module Structurizr
 
       def initialize(workspace_path)
         @workspace = Structurizr::Workspace.from_json(File.read(workspace_path))
+      end
+    end
+
+    class Application
+      attr_reader :context, :workspace_path
+
+      def initialize(argv)
+        @argv = argv
+      end
+
+      def parse_workspace_path!
+        @workspace_path =
+          if (input_path = argv.first) && File.file?(input_path)
+            argv.first
+          else
+            puts "Usage: structurizr-repl <path/to/structurizr.json>"
+
+            exit 2
+          end
+      end
+
+      def prepare_context!
+        @context = Structurizr::REPL::Context.new(workspace_path)
+      end
+
+      def setup_pry!
+        setup_welcome_message
+        register_commands
+      end
+
+      def start
+        Pry.start(context)
+      end
+
+      private
+
+      def register_commands
+        Pry::Commands.add_command Structurizr::REPL::Commands::Workspace
+        Pry::Commands.add_command Structurizr::REPL::Commands::Model
+        Pry::Commands.import Structurizr::REPL::Commands::Shortcuts::All
+      end
+
+      def setup_welcome_message
+        Pry.hooks.add_hook(
+          :before_session,
+          :structurizr_welcome_message
+        ) do |output, binding, pry|
+          output.puts <<~ECHO
+            Welcome to Structurizr REPL
+
+            Type `help structurizr` to get a list of commands
+          ECHO
+        end
       end
     end
   end

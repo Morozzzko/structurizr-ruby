@@ -28,7 +28,6 @@ module Structurizr
 
           assert_includes commands, 'relationships'
           assert_includes commands, 'elements'
-          assert_includes commands, 'components'
           assert_includes commands, 'software_systems'
           assert_includes commands, 'people'
         end
