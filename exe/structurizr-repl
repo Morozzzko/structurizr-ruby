@@ -4,7 +4,7 @@
 require 'structurizr'
 require 'structurizr/repl'
 
-application = Structurizr::REPL::Application.new
+application = Structurizr::REPL::Application.new(ARGV)
 
 application.parse_workspace_path!
 application.prepare_context!
