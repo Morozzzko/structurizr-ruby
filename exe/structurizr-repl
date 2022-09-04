@@ -1,0 +1,13 @@
+#!/usr/bin/env jruby
+# frozen_string_literal: true
+
+require 'structurizr'
+require 'structurizr/repl'
+
+application = Structurizr::REPL::Application.new
+
+application.parse_workspace_path!
+application.prepare_context!
+application.setup_pry!
+
+application.start
