@@ -20,7 +20,7 @@ module Structurizr
         end
 
         def test_shortcut_command_to_workspace_model_relationships
-          assert_equal command.call, workspace.model.relationships
+          assert_equal workspace.model.relationships, command.call
         end
 
         def test_all_shortcut_commands

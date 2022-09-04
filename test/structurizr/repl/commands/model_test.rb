@@ -19,7 +19,7 @@ module Structurizr
         end
 
         def test_access_to_workspace_model
-          assert_equal command.call, workspace.model
+          assert_equal workspace.model, command.call
         end
       end
     end
