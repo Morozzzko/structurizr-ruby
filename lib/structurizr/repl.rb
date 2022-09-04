@@ -41,7 +41,7 @@ module Structurizr
           if (input_path = argv.first) && File.file?(input_path)
             argv.first
           else
-            puts "Usage: structurizr-repl <path/to/structurizr.json>"
+            puts 'Usage: structurizr-repl <path/to/structurizr.json>'
 
             exit 2
           end
@@ -72,7 +72,7 @@ module Structurizr
         Pry.hooks.add_hook(
           :before_session,
           :structurizr_welcome_message
-        ) do |output, binding, pry|
+        ) do |output, _binding, _pry|
           output.puts <<~ECHO
             Welcome to Structurizr REPL
 

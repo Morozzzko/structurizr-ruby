@@ -4,9 +4,9 @@ module Structurizr
   module REPL
     module Commands
       class Workspace < Pry::ClassCommand
-        match "workspace"
-        description "Access current workspace"
-        group "Structurizr"
+        match 'workspace'
+        description 'Access current workspace'
+        group 'Structurizr'
         command_options keep_retval: true
 
         def process
@@ -15,9 +15,9 @@ module Structurizr
       end
 
       class Model < Pry::ClassCommand
-        match "model"
+        match 'model'
         description "Access current workspace's model"
-        group "Structurizr"
+        group 'Structurizr'
         command_options keep_retval: true
 
         def process
@@ -37,7 +37,7 @@ module Structurizr
           shortcut_class = Class.new(Pry::ClassCommand) do
             match attribute_name
             description "Access model's #{attribute_name}"
-            group "Structurizr"
+            group 'Structurizr'
             command_options keep_retval: true
 
             define_method :process do
