@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'pry'
+  spec.add_dependency 'ruby-next'
   spec.add_development_dependency 'minitest'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-minitest'
