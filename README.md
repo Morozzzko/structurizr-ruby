@@ -3,11 +3,13 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b75e8c130fc8b3bf54b5/test_coverage)](https://codeclimate.com/github/Morozzzko/structurizr-ruby/test_coverage)[![Maintainability](https://api.codeclimate.com/v1/badges/b75e8c130fc8b3bf54b5/maintainability)](https://codeclimate.com/github/Morozzzko/structurizr-ruby/maintainability)
 
 
-`structurizr-ruby` brings the [C4 model](https://c4model.com) to Ruby. It piggybacks on top of [Java's API](https://github.com/structurizr/java) for [Structurizr](https://structurizr.com), which is a powerful tool for incorporating C4 model into your software architecture process. 
+`structurizr-ruby` brings the [C4 model](https://c4model.com) to Ruby. It piggybacks on top of [Java's API](https://github.com/structurizr/java) for [Structurizr](https://structurizr.com), which is a powerful tool for incorporating C4 model into your software architecture process.
 
 The primary goal is to enable better introspection & scripting for workspaces defined by Structurizr DSL.
 
-As a bonus, this library provides a complete integration to build Structurizr workspace from Ruby. However, it doesn't make much sense since there's Structurizr DSL.
+Number 1 feature of this library is actually a runnable `REPL` which allows a flexible introspection. You can run it via `structurizr-repl <workspace.json>`.
+
+As a bonus, this library provides a complete integration to build Structurizr workspace from Ruby. However, it doesn't make much sense since there's [Structurizr DSL](https://structurizr.com/help/dsl). However, it's still a bit useful if you're using [DSL's scripting feature](https://github.com/structurizr/dsl/blob/master/docs/language-reference.md#scripts), you might find this library a bit useful.
 
 If you've met something which doesn't have a nice Ruby DSL, you can always use [`Structurizr::Metal`](/lib/structurizr/metal.rb) to access Java classes and methods. Please don't forget to [submit issue or a pull-request](#Contributing) which describes your use-case and the missing features.
 
@@ -36,6 +38,8 @@ Before you start, you need to `require` the necessary files:
 ```ruby
 require 'structurizr'
 ```
+
+If you have a `workspace.json`, you can run an interactive REPL to read values from it: `structurizr-repl workspace.json`
 
 ## Development
 
