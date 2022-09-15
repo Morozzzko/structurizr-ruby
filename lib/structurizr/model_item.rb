@@ -12,7 +12,7 @@ module Structurizr
 
     def inspect
       class_name = self.class.name.split('::').last
-      %(<#{class_name}: "#{name}">)
+      %(#<#{class_name}: "#{name}">)
     end
   end
 end
