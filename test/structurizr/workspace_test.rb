@@ -13,5 +13,9 @@ module Structurizr
     def test_workspace
       refute_nil workspace.model
     end
+
+    def test_inspect
+      assert_equal %{#<Structurizr::Workspace("Name")>}, workspace.inspect
+    end
   end
 end
