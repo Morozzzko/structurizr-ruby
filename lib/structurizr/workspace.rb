@@ -15,5 +15,9 @@ module Structurizr
     def self.from_json(json)
       Metal::Util::WorkspaceUtils.from_json(json)
     end
+
+    def inspect
+      %(#<Structurizr::Workspace(#{name.inspect})>)
+    end
   end
 end
