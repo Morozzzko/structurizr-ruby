@@ -13,6 +13,14 @@ As a bonus, this library provides a complete integration to build Structurizr wo
 
 If you've met something which doesn't have a nice Ruby DSL, you can always use [`Structurizr::Metal`](/lib/structurizr/metal.rb) to access Java classes and methods. Please don't forget to [submit issue or a pull-request](#Contributing) which describes your use-case and the missing features.
 
+## Versioning
+
+After entering 1.0, this library will follow Structurizr-core versioning. If the gem bundles `structurizr-core` 1.26.1, the gem will use version 1.26.1. 
+
+Since Structurizr **does not follow SemVer**, there are no guarantees that minor versions won't break anything. 
+
+At least we have version parity with Structurizr.
+
 ## Installation
 
 Install the gem:
