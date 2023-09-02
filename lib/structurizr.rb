@@ -13,7 +13,6 @@ require 'structurizr/software_system'
 require 'structurizr/person'
 
 require 'structurizr/enums'
-require 'structurizr/documentation_templates'
 
 require 'structurizr/image_utils'
 

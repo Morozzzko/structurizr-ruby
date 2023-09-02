@@ -63,13 +63,6 @@ module Structurizr
 
         styles.add_element_style('Future State').opacity(30).border(Border::Dashed)
         styles.add_relationship_style('Future State').opacity(30).dashed(true)
-
-        template = StructurizrDocumentationTemplate.new(workspace)
-        documentationRoot = java.io.File.new(File.join(__dir__, 'financialrisksystem'))
-        template.add_context_section(financialRiskSystem, java.io.File.new(documentationRoot, 'context.adoc'))
-        template.add_functional_overview_section(financialRiskSystem, java.io.File.new(documentationRoot, 'functional-overview.md'))
-        template.add_quality_attributes_section(financialRiskSystem, java.io.File.new(documentationRoot, 'quality-attributes.md'))
-        template.add_images(documentationRoot)
       end
     end
   end

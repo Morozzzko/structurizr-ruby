@@ -75,11 +75,6 @@ module Structurizr
         dynamicView.add(customer, customerServiceUser)
         dynamicView.add(customerServiceUser, ecommerceSystem)
 
-        template = StructurizrDocumentationTemplate.new(workspace)
-        template.add_section('System Landscape', Format::Markdown, 'Here is some information about the Widgets Limited system landscape... ![](embed:SystemLandscape)')
-        template.add_context_section(ecommerceSystem, Format::Markdown, 'This is the context section for the E-commerce System... ![](embed:EcommerceSystemContext)')
-        template.add_context_section(fulfilmentSystem, Format::Markdown, 'This is the context section for the Fulfilment System... ![](embed:FulfilmentSystemContext)')
-
         styles.add_element_style(Tags::SOFTWARE_SYSTEM).shape(Shape::RoundedBox)
         styles.add_element_style(Tags::PERSON).shape(Shape::Person)
 
