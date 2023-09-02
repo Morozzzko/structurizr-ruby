@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
+  spec.files += Dir['lib/**/*.jar']
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
@@ -31,4 +32,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-minitest'
   spec.add_development_dependency 'simplecov', '~> 0.17.1'
+
+  spec.platform = 'java'
+  spec.requirements << "jar com.structurizr, structurizr-core, #{Structurizr::VERSION}"
+  spec.requirements << "jar com.structurizr, structurizr-client, #{Structurizr::VERSION}"
+  spec.requirements << "jar com.structurizr, structurizr-documentation, 1.1.1"
+  spec.requirements << "jar com.structurizr, structurizr-graphviz, 2.2.1"
+  spec.requirements << "jar com.structurizr, structurizr-export, 1.16.1"
+  spec.requirements << "jar com.structurizr, structurizr-import, 1.5.0"
+  spec.requirements << "jar com.structurizr, structurizr-dsl, 1.32.0"
 end
