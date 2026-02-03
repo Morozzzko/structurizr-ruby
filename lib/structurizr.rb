@@ -3,8 +3,8 @@
 require 'ruby-next/language/setup'
 RubyNext::Language.setup_gem_load_path
 
+require 'structurizr_jars'
 require 'structurizr/version'
-require 'structurizr/structurizr_jars'
 require 'structurizr/model_item'
 require 'structurizr/workspace'
 require 'structurizr/container'

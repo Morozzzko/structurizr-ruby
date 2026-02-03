@@ -4,7 +4,7 @@ require_relative 'lib/structurizr/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'structurizr'
-  spec.version       = Structurizr::VERSION
+  spec.version       = defined?(Structurizr::HOTFIX_VERSION) ? Structurizr::HOTFIX_VERSION : Structurizr::VERSION
   spec.authors       = ['Igor S. Morozov']
   spec.email         = ['igor@morozov.is']
 
