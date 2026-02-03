@@ -2,7 +2,7 @@
 
 require 'java'
 
-require 'structurizr_jars'
+require_relative '../structurizr_jars'
 
 module Structurizr
   # This namespace provides lower-level Java integration with Structurizr

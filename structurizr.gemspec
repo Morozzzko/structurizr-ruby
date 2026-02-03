@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pry'
   spec.add_dependency 'ruby-next'
   spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-minitest'
   spec.add_development_dependency 'simplecov', '~> 0.17.1'
@@ -36,9 +37,8 @@ Gem::Specification.new do |spec|
   spec.platform = 'java'
   spec.requirements << "jar com.structurizr, structurizr-core, #{Structurizr::VERSION}"
   spec.requirements << "jar com.structurizr, structurizr-client, #{Structurizr::VERSION}"
-  spec.requirements << "jar com.structurizr, structurizr-documentation, 1.1.1"
-  spec.requirements << "jar com.structurizr, structurizr-graphviz, 2.2.1"
-  spec.requirements << "jar com.structurizr, structurizr-export, 1.16.1"
-  spec.requirements << "jar com.structurizr, structurizr-import, 1.5.0"
-  spec.requirements << "jar com.structurizr, structurizr-dsl, 1.32.0"
+  spec.requirements << "jar com.structurizr, structurizr-export, #{Structurizr::VERSION}"
+  spec.requirements << "jar com.structurizr, structurizr-import, #{Structurizr::VERSION}"
+  spec.requirements << "jar com.structurizr, structurizr-dsl, #{Structurizr::VERSION}"
+  spec.requirements << "jar com.structurizr, structurizr-graphviz, #{Structurizr::GRAPHVIZ_VERSION}"
 end
